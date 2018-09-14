@@ -34,7 +34,6 @@ project "TerrainRL_Optimizer"
 		"../scenarios/Draw*.h",
 		"../scenarios/Draw*.cpp",
 		"../sim/CharTracer.cpp",
-		"../scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 

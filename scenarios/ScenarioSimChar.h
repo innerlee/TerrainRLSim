@@ -59,7 +59,7 @@ public:
 
 	virtual void FilterPartIDs(std::vector<int>& out_ids) const;
 	virtual void AddPerturb(const tPerturb& perturb);
-	virtual void ApplyRandForce(double min_force, double max_force, 
+	virtual void ApplyRandForce(double min_force, double max_force,
 								double min_dur, double max_dur, cSimObj* obj);
 	virtual void ApplyRandForce();
 	virtual int GetRandPerturbPartID();

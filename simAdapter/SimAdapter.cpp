@@ -10,12 +10,6 @@
 #include "sim/TerrainRLCharController.h"
 #include "sim/WaypointController.h"
 #include "scenarios/ScenarioExp.h"
-#include "scenarios/DrawScenarioImitateEval.h"
-#include "scenarios/ScenarioImitate.h"
-#include "scenarios/ScenarioImitateEval.h"
-#include "scenarios/ScenarioImitateStepEval.h"
-#include "scenarios/ScenarioExp.h"
-#include "scenarios/ScenarioHikeEval.h"
 #include "scenarios/ScenarioSoccerEval.h"
 
 
@@ -81,63 +75,9 @@ void cSimAdapter::init()
 		InitCamera();
 		ClearScenario();
 
-		if (scenario_name == "imitate_eval")
-		{
-			std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioImitateEval>(new cDrawScenarioImitateEval(gCamera));
-			// std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioSimChar>(new cDrawScenarioSimChar(gCamera));
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
-			this->_gScenario = scenario__;
-			if (this->_gScenario != NULL)
-			{
-				auto sim_char_scene = std::dynamic_pointer_cast<cDrawScenarioTerrainRL>(scenario__);
-				if (sim_char_scene != nullptr)
-				{
-					sim_char_scene->SetOutputTex(gIntermediateFrameBuffer);
-				}
-
-			}
-			gScenario = std::shared_ptr<cDrawScenario>(scenario__);
-			this->_gScenario = gScenario;
-		}
-		else if (scenario_name == "sim_char")
+		if (scenario_name == "sim_char")
 		{
 			std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioSimChar>(new cDrawScenarioSimChar(gCamera));
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
-			this->_gScenario = scenario__;
-			if (this->_gScenario != NULL)
-			{
-				auto sim_char_scene = std::dynamic_pointer_cast<cDrawScenarioTerrainRL>(scenario__);
-				if (sim_char_scene != nullptr)
-				{
-					sim_char_scene->SetOutputTex(gIntermediateFrameBuffer);
-				}
-
-			}
-			gScenario = std::shared_ptr<cDrawScenario>(scenario__);
-			this->_gScenario = gScenario;
-		}
-		else if (scenario_name == "imitate_step_eval")
-		{
-			std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioImitateStepEval>(new cDrawScenarioImitateStepEval(gCamera));
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
-			this->_gScenario = scenario__;
-			if (this->_gScenario != NULL)
-			{
-				auto sim_char_scene = std::dynamic_pointer_cast<cDrawScenarioTerrainRL>(scenario__);
-				if (sim_char_scene != nullptr)
-				{
-					sim_char_scene->SetOutputTex(gIntermediateFrameBuffer);
-				}
-
-			}
-			gScenario = std::shared_ptr<cDrawScenario>(scenario__);
-			this->_gScenario = gScenario;
-		}
-		else if (scenario_name == "hike_eval")
-		{
-			gCameraPosition = tVector(0, 30, 30, 0);
-
-			std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioHikeEval>(new cDrawScenarioHikeEval(gCamera));
 			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
 			this->_gScenario = scenario__;
 			if (this->_gScenario != NULL)
@@ -180,32 +120,9 @@ void cSimAdapter::init()
 	else
 	{
 		ClearScenario();
-		if (scenario_name == "imitate_eval")
-		{
-			// std::shared_ptr<cScenarioImitate> scenario__ = std::shared_ptr<cScenarioImitate>(new cScenarioImitate());
-			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioSimChar>(new cScenarioImitateEval() );
-			this->_scene = std::dynamic_pointer_cast<cScenarioSimChar>(scenario__);
-			// gScenario = std::shared_ptr<cScenario>(scenario__);
-			this->_gScenario = scenario__ ;
-		}
-		else if (scenario_name == "sim_char")
+		if (scenario_name == "sim_char")
 		{
 			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioSimChar>(new cScenarioSimChar());
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__);
-			// gScenario = std::shared_ptr<cScenario>(scenario__);
-			this->_gScenario = scenario__ ;
-		}
-		else if (scenario_name == "imitate_step_eval")
-		{
-			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioImitateStepEval>(new cScenarioImitateStepEval());
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__);
-			// gScenario = std::shared_ptr<cScenario>(scenario__);
-			this->_gScenario = scenario__ ;
-		}
-		else if (scenario_name == "hike_eval")
-		{
-			gCameraPosition = tVector(0, 30, 30, 0);
-			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioHikeEval>(new cScenarioHikeEval());
 			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__);
 			// gScenario = std::shared_ptr<cScenario>(scenario__);
 			this->_gScenario = scenario__ ;

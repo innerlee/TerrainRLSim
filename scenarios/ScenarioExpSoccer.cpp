@@ -31,7 +31,7 @@ double cScenarioExpSoccer::CalcReward() const
 	//double target_pos_w = 0;
 	double target_vel_w = 0.4;
 	double target_pos_w = 0.4;
-	
+
 	const double total_w = com_ball_vel_w + com_ball_pos_w + target_vel_w + target_pos_w;
 	com_ball_vel_w /= total_w;
 	com_ball_pos_w /= total_w;
@@ -86,7 +86,7 @@ double cScenarioExpSoccer::CalcReward() const
 			double target_vel_reward = std::exp(-target_scale * target_vel_err);
 			target_vel_reward = (ball_target_vel > 0) ? target_vel_reward : 0;
 			double target_pos_reward = std::exp(-target_pos_scale * target_pos_err);
-			
+
 			bool target_success = (curr_ball_target_dist < mTargetResetDist * mTargetResetDist)
 									&& (com_ball_dist < gComBallDistThreshold * gComBallDistThreshold);
 			if (target_success)
@@ -97,16 +97,10 @@ double cScenarioExpSoccer::CalcReward() const
 				target_pos_reward = 1;
 			}
 
-			reward = com_ball_vel_w * com_ball_vel_reward + com_ball_pos_w * com_ball_pos_reward 
+			reward = com_ball_vel_w * com_ball_vel_reward + com_ball_pos_w * com_ball_pos_reward
 					+ target_vel_w * target_vel_reward + target_pos_w * target_pos_reward;
 		}
 	}
-
-
-#if defined(HACK_SOCCER_LLC)
-	double hack_imitate_reward = cScenarioExpImitate::CalcReward();
-	reward = 0.5 * reward + 0.5 * hack_imitate_reward;
-#endif
 
 	return reward;
 }
@@ -333,7 +327,7 @@ void cScenarioExpSoccer::UpdateBallPos(double time_elapsed)
 		{
 			int handle = GetTargetBallHandle();
 			RemoveObj(handle);
-			
+
 			if (EnabledRandTargetPos())
 			{
 				ResetTargetPos();
@@ -423,7 +417,7 @@ void cScenarioExpSoccer::SetBallPos(int ball_handle, const tVector& pos)
 
 	tVector ground_pos = pos;
 	ground_pos[1] = r + mGround->SampleHeight(ground_pos);
-	
+
 	ball->SetPos(ground_pos);
 	ball->SetRotation(tQuaternion::Identity());
 	ball->SetLinearVelocity(tVector::Zero());

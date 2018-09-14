@@ -14,17 +14,11 @@
 #include "scenarios/ScenarioTrainMACEDPG.h"
 #include "scenarios/ScenarioMimic.h"
 #include "scenarios/ScenarioMimicRNN.h"
-#include "scenarios/ScenarioImitate.h"
-#include "scenarios/ScenarioImitateTarget.h"
-#include "scenarios/ScenarioImitateStep.h"
 #include "scenarios/ScenarioTrainHike.h"
 #include "scenarios/ScenarioTrainSoccer.h"
 #include "scenarios/ScenarioTrainLoco.h"
 #include "scenarios/OptScenarioPoliEval.h"
 #include "scenarios/OptScenarioMimicEval.h"
-#include "scenarios/OptScenarioImitateEval.h"
-#include "scenarios/OptScenarioImitateTargetEval.h"
-#include "scenarios/OptScenarioImitateStepEval.h"
 #include "scenarios/OptScenarioHikeEval.h"
 #include "scenarios/OptScenarioSoccerEval.h"
 #include "scenarios/OptScenarioLocoEval.h"
@@ -194,30 +188,6 @@ void SetupScenario()
 
 		gScenario = scene;
 	}
-	else if (scenario_name == "imitate")
-	{
-		auto scene = std::shared_ptr<cScenarioImitate>(new cScenarioImitate());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "imitate_target")
-	{
-		auto scene = std::shared_ptr<cScenarioImitateTarget>(new cScenarioImitateTarget());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "imitate_step")
-	{
-		auto scene = std::shared_ptr<cScenarioImitateStep>(new cScenarioImitateStep());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
 	else if (scenario_name == "train_hike")
 	{
 		auto scene = std::shared_ptr<cScenarioTrainHike>(new cScenarioTrainHike());
@@ -253,30 +223,6 @@ void SetupScenario()
 	else if (scenario_name == "mimic_eval")
 	{
 		auto scene = std::shared_ptr<cOptScenarioMimicEval>(new cOptScenarioMimicEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "imitate_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioImitateEval>(new cOptScenarioImitateEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "imitate_target_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioImitateTargetEval>(new cOptScenarioImitateTargetEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "imitate_step_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioImitateStepEval>(new cOptScenarioImitateStepEval());
 		scene->SetTimeStep(cOptScenario::gTimeStep);
 		scene->SetPoolSize(gNumThreads);
 

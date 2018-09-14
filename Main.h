@@ -17,15 +17,9 @@
 #include "scenarios/DrawScenarioTrainMACEDPG.h"
 #include "scenarios/DrawScenarioPoliEval.h"
 #include "scenarios/DrawScenarioMimicEval.h"
-#include "scenarios/DrawScenarioImitateEval.h"
-#include "scenarios/DrawScenarioImitateTargetEval.h"
 #include "scenarios/DrawScenarioHikeEval.h"
 #include "scenarios/DrawScenarioSoccerEval.h"
-#include "scenarios/DrawScenarioImitateStepEval.h"
 #include "scenarios/DrawScenarioTrainDMACE.h"
-#include "scenarios/DrawScenarioImitate.h"
-#include "scenarios/DrawScenarioImitateTarget.h"
-#include "scenarios/DrawScenarioImitateStep.h"
 #include "scenarios/DrawScenarioTrainHike.h"
 #include "scenarios/DrawScenarioTrainSoccer.h"
 #include "scenarios/DrawScenarioMimic.h"
@@ -200,18 +194,6 @@ void SetupScenario()
 	{
 		gScenario = std::shared_ptr<cDrawScenarioMimicRNN>(new cDrawScenarioMimicRNN(gCamera));
 	}
-	else if (scenario_name == "imitate")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitate>(new cDrawScenarioImitate(gCamera));
-	}
-	else if (scenario_name == "imitate_target")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitateTarget>(new cDrawScenarioImitateTarget(gCamera));
-	}
-	else if (scenario_name == "imitate_step")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitateStep>(new cDrawScenarioImitateStep(gCamera));
-	}
 	else if (scenario_name == "train_hike")
 	{
 		gScenario = std::shared_ptr<cDrawScenarioTrainHike>(new cDrawScenarioTrainHike(gCamera));
@@ -227,18 +209,6 @@ void SetupScenario()
 	else if (scenario_name == "mimic_eval")
 	{
 		gScenario = std::shared_ptr<cDrawScenarioMimicEval>(new cDrawScenarioMimicEval(gCamera));
-	}
-	else if (scenario_name == "imitate_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitateEval>(new cDrawScenarioImitateEval(gCamera));
-	}
-	else if (scenario_name == "imitate_target_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitateTargetEval>(new cDrawScenarioImitateTargetEval(gCamera));
-	}
-	else if (scenario_name == "imitate_step_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioImitateStepEval>(new cDrawScenarioImitateStepEval(gCamera));
 	}
 	else if (scenario_name == "hike_eval")
 	{

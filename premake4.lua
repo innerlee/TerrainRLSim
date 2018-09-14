@@ -120,7 +120,6 @@ project "TerrainRL"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -389,7 +388,6 @@ project "terrainrlUtil"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -648,7 +646,6 @@ project "terrainrlAnim"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -911,7 +908,6 @@ project "terrainrlSim"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -1180,7 +1176,6 @@ project "terrainrlRender"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -1444,7 +1439,6 @@ project "terrainrlScenarios"
 	}
 	excludes
 	{
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 	}
 	includedirs {
@@ -1729,7 +1723,6 @@ project "TerrainRL_Optimizer"
 		"scenarios/Draw*.h",
 		"scenarios/Draw*.cpp",
 		"sim/CharTracer.cpp",
-		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
 		"optimizer/opt/QL.c",
 		"optimizer/opt/QuadProg.cpp",

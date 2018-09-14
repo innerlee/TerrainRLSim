@@ -16,7 +16,7 @@ public:
 	virtual void Reset();
 	virtual void Clear();
 	virtual void Update(double time_elapsed);
-	
+
 	virtual void Keyboard(unsigned char key, int x, int y);
 	virtual void Shutdown();
 

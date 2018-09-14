@@ -1,7 +1,6 @@
 #pragma once
 
 #include "scenarios/ScenarioSimChar.h"
-#include "scenarios/ScenarioExpImitateStep.h"
 
 class cScenarioSampleAction : public cScenario
 {
@@ -19,8 +18,6 @@ public:
 	virtual std::string GetName() const;
 
 protected:
-
-	typedef cScenarioExpImitateStep tTarScene;
 
 	std::shared_ptr<cArgParser> mArgParser;
 	std::unique_ptr<cScenarioSimChar> mScene;
