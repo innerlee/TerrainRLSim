@@ -618,4 +618,3 @@ void cSimAdapter::handleUpdatedAction()
 		sc->HandleNewActionUpdate();
 	}
 }
-

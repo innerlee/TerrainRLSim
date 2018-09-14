@@ -1414,4 +1414,3 @@ void testBVHReader()
 	exit(1);
 }
 */
-

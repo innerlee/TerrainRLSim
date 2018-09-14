@@ -8,7 +8,7 @@ public:
 	cSolverAsync(const caffe::SolverParameter& param)
 		: cCaffeSolver<tSolverType>(param) {};
 	virtual ~cSolverAsync() {};
-	
+
 	virtual void ApplySteps(int steps);
 };
 

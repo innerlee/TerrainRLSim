@@ -244,7 +244,7 @@ void cNeuralNet::Train(const tProblem& prob)
 
 		int batch_size = GetBatchSize();
 		int num_batches = static_cast<int>(prob.mX.rows()) / batch_size;
-		
+
 		StepSolver(prob.mPassesPerStep * num_batches);
 	}
 	else
@@ -406,7 +406,7 @@ void cNeuralNet::Backward(const Eigen::VectorXd& y_diff, Eigen::VectorXd& out_x_
 
 	auto bottom_vecs = mNet->bottom_vecs();
 	// The first layer is the train version and the second is the test version where gradients are computed
-	const auto& bottom_blob = bottom_vecs[1][gXBlobIdx]; 
+	const auto& bottom_blob = bottom_vecs[1][gXBlobIdx];
 	const tNNData* bottom_data = GetBlobDiff(bottom_blob);
 
 	int input_size = GetInputSize();
@@ -417,7 +417,7 @@ void cNeuralNet::Backward(const Eigen::VectorXd& y_diff, Eigen::VectorXd& out_x_
 	{
 		out_x_diff[i] = bottom_data[i];
 	}
-	
+
 	NormalizeInputDiff(out_x_diff);
 }
 
@@ -944,7 +944,7 @@ void cNeuralNet::CopyGrad(const cNeuralNet& other)
 	assert(other.HasSolver());
 	auto other_net = other.GetTrainNet();
 	auto this_net = GetTrainNet();
-	
+
 	auto other_params = other_net->learnable_params();
 	auto this_params = this_net->learnable_params();
 	assert(other_params.size() == this_params.size());
@@ -1343,7 +1343,7 @@ void cNeuralNet::WriteOffsetScale(const std::string& norm_file) const
 		std::string output_offset_json = cJsonUtil::BuildVectorJson(mOutputOffset);
 		std::string output_scale_json = cJsonUtil::BuildVectorJson(mOutputScale);
 
-		fprintf(f, "{\n\"%s\": %s,\n\"%s\": %s,\n\"%s\": %s,\n\"%s\": %s\n}", 
+		fprintf(f, "{\n\"%s\": %s,\n\"%s\": %s,\n\"%s\": %s,\n\"%s\": %s\n}",
 			gInputOffsetKey.c_str(), input_offset_json.c_str(),
 			gInputScaleKey.c_str(), input_scale_json.c_str(),
 			gOutputOffsetKey.c_str(), output_offset_json.c_str(),
