@@ -31,7 +31,6 @@ public:
 		eCharCtrlRaptorMACE,
 		eCharCtrlRaptorDMACE,
 		eCharCtrlCt,
-		eCharCtrlCtRNN,
 		eCharCtrlCtPD,
 		eCharCtrlCtVel,
 		eCharCtrlCtNPD,
@@ -158,7 +157,6 @@ protected:
 	static bool BuildBipedController3DCACLA(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 
 	static bool BuildCtController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	static bool BuildCtRNNController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtPDController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtVelController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtNPDController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);

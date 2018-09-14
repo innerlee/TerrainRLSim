@@ -22,7 +22,6 @@
 #include "sim/BipedController3D.h"
 #include "sim/BipedController3DCACLA.h"
 #include "sim/CtController.h"
-#include "sim/CtRNNController.h"
 #include "sim/CtPDController.h"
 #include "sim/CtVelController.h"
 #include "sim/CtNPDController.h"
@@ -68,7 +67,6 @@ const std::string gCharCtrlName[cTerrainRLCtrlFactory::eCharCtrlMax] =
 	"raptor_mace",
 	"raptor_dmace",
 	"ct",
-	"ct_rnn",
 	"ct_pd",
 	"ct_vel",
 	"ct_npd",
@@ -218,9 +216,6 @@ bool cTerrainRLCtrlFactory::BuildController(const tCtrlParams& params, std::shar
 		break;
 	case eCharCtrlCt:
 		succ = BuildCtController(params, out_ctrl);
-		break;
-	case eCharCtrlCtRNN:
-		succ = BuildCtRNNController(params, out_ctrl);
 		break;
 	case eCharCtrlCtPD:
 		succ = BuildCtPDController(params, out_ctrl);
@@ -1046,46 +1041,6 @@ bool cTerrainRLCtrlFactory::BuildCtController(const tCtrlParams& params, std::sh
 	bool succ = true;
 
 	std::shared_ptr<cCtController> ctrl = std::shared_ptr<cCtController>(new cCtController());
-	ctrl->SetGround(params.mGround);
-	ctrl->Init(params.mChar.get());
-	ctrl->SetUpdatePeriod(update_period);
-
-	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
-	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	const std::string& critic_net_file = params.mNetFiles[eNetFileCritic];
-	const std::string& critic_model_file = params.mNetFiles[eNetFileCriticModel];
-
-	if (poli_net_file != "")
-	{
-		succ &= ctrl->LoadNet(poli_net_file);
-
-		if (succ && poli_model_file != "")
-		{
-			ctrl->LoadModel(poli_model_file);
-		}
-	}
-
-	if (critic_net_file != "")
-	{
-		bool critic_succ = ctrl->LoadCriticNet(critic_net_file);
-		succ &= critic_succ;
-		if (critic_succ && critic_model_file != "")
-		{
-			ctrl->LoadCriticModel(critic_model_file);
-		}
-	}
-
-	out_ctrl = ctrl;
-
-	return succ;
-}
-
-bool cTerrainRLCtrlFactory::BuildCtRNNController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl)
-{
-	const double update_period = 1 / params.mCtQueryRate;
-	bool succ = true;
-
-	std::shared_ptr<cCtRNNController> ctrl = std::shared_ptr<cCtRNNController>(new cCtRNNController());
 	ctrl->SetGround(params.mGround);
 	ctrl->Init(params.mChar.get());
 	ctrl->SetUpdatePeriod(update_period);
