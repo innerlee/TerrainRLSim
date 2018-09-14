@@ -2,11 +2,11 @@
 #include "util/FileUtil.h"
 #include "learning/ACTrainer.h"
 
-cOptScenarioPoliMTU::cOptScenarioPoliMTU(cOptimizer& optimizer) 
+cOptScenarioPoliMTU::cOptScenarioPoliMTU(cOptimizer& optimizer)
 	: mOptimizer(optimizer)
 {
 	mTimeStep = 1 / 30.0;
-	
+
 	mPolicyOutputFile = "";
 	mMTUOutputFile = "";
 	mIntPolicyOutputFile = "";

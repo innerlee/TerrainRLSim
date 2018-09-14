@@ -38,7 +38,7 @@ cScenarioExp::~cScenarioExp()
 void cScenarioExp::ParseArgs(const std::shared_ptr<cArgParser>& parser)
 {
 	cScenarioSimChar::ParseArgs(parser);
-	
+
 	parser->ParseInt("tuple_buffer_size", mTupleBufferSize);
 	parser->ParseDouble("exp_rate", mExpParams.mRate);
 	parser->ParseDouble("exp_temp", mExpParams.mTemp);
@@ -67,10 +67,10 @@ void cScenarioExp::Init()
 	ResetParams();
 	mCurriculumPhase = 0;
 	mPrevCOM = mChar->CalcCOM();
-	
+
 	mTupleBuffer.resize(mTupleBufferSize);
 	ResetTupleBuffer();
-	
+
 	EnableExplore(mEnableExplore);
 	SetExpParams(mExpParams);
 

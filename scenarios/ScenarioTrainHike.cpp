@@ -382,7 +382,7 @@ void cScenarioTrainHike::UpdateExpScene(double time_step, int exp_id, std::share
 		bool update_exp_mode = false;
 		auto exp_hike = std::dynamic_pointer_cast<cScenarioExpHike>(out_exp);
 		cScenarioExpHike::eExpMode exp_mode = exp_hike->GetExpMode();
-		
+
 		if (exp_mode == cScenarioExpHike::eExpModeHLC)
 		{
 			bool is_full = exp_hike->IsTupleBufferFull();

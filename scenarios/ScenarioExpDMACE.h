@@ -15,7 +15,7 @@ public:
 	virtual std::string GetName() const;
 
 protected:
-	
+
 	virtual void RecordFlagsBeg(tExpTuple& out_tuple) const;
 	virtual bool CheckExpCritic() const;
 	virtual bool CheckExpActor() const;

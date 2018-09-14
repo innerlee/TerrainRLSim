@@ -29,7 +29,7 @@ void cScenarioTrainMACEDPG::BuildTrainer(std::shared_ptr<cTrainerInterface>& out
 	int num_frags = 0;
 	int frag_size = 0;
 	GetFragParams(num_frags, frag_size);
-	
+
 	if (mEnableAsyncMode)
 	{
 		auto trainer = std::shared_ptr<cAsyncMACEDPGTrainer>(new cAsyncMACEDPGTrainer());

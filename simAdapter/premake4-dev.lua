@@ -19,7 +19,6 @@ project "terrainRLAdapter"
 		-- "util/*.cpp",
 		-- "sim/*.cpp",
 		-- "anim/*.cpp",
-		-- "learning/*.cpp",
 		-- "scenarios/*.cpp",
 		"../external/LodePNG/*.cpp",
 		"./*.cpp",
@@ -32,7 +31,6 @@ project "terrainRLAdapter"
 	includedirs {
 		"./",
 		"anim",
-		"learning",
 		"sim",
 		"render",
 		"scenarios",
@@ -41,7 +39,6 @@ project "terrainRLAdapter"
 	}
 	links {
 		"terrainrlScenarios",
-		"terrainrlLearning",
 		"terrainrlAnim",
 		"terrainrlSim",
 		"terrainrlUtil",

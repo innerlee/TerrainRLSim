@@ -45,7 +45,7 @@ cScenarioTrain::~cScenarioTrain()
 void cScenarioTrain::ParseArgs(const std::shared_ptr<cArgParser>& parser)
 {
 	cScenario::ParseArgs(parser);
-	
+
 	parser->ParseString("output_path", mOutputFile);
 	parser->ParseInt("trainer_max_iter", mMaxIter);
 
@@ -183,7 +183,7 @@ void cScenarioTrain::Run()
 		std::thread& curr_thread = threads[i];
 		curr_thread = std::thread(&cScenarioTrain::ExpHelper, this, mExpPool[i], i);
 	}
-	
+
 	for (int i = 0; i < num_threads; ++i)
 	{
 		threads[i].join();
@@ -464,7 +464,7 @@ void cScenarioTrain::SetupTrainerOffsetScale(const std::shared_ptr<cTrainerInter
 	if (!valid_init_model)
 	{
 		std::shared_ptr<cNNController> ctrl = std::static_pointer_cast<cNNController>(GetDefaultController());
-		
+
 		Eigen::VectorXd input_offset;
 		Eigen::VectorXd input_scale;
 		ctrl->BuildNNInputOffsetScale(input_offset, input_scale);
@@ -488,7 +488,7 @@ void cScenarioTrain::UpdateTrainer(const std::vector<tExpTuple>& tuples, int exp
 
 	int iters = learner->GetIter();
 	PrintLearnerInfo(exp_id);
-	
+
 	if ((iters % mItersPerOutput == 0 && iters > 0) || iters == 1)
 	{
 		learner->OutputModel(mOutputFile);
@@ -524,7 +524,7 @@ void cScenarioTrain::UpdateExpScene(double time_step, int exp_id, std::shared_pt
 {
 	out_done = false;
 	out_exp->Update(time_step);
-	
+
 	if (time_step > 0)
 	{
 		bool is_full = out_exp->IsTupleBufferFull();

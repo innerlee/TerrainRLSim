@@ -92,7 +92,7 @@ protected:
 
 	virtual std::shared_ptr<const cNNController> GetNNController() const;
 	virtual std::shared_ptr<cNNController> GetNNController();
-	
+
 	virtual bool EnableEvalRecord() const;
 	virtual void RecordState(Eigen::VectorXd& out_state) const;
 	virtual void RecordAction(Eigen::VectorXd& out_action) const;

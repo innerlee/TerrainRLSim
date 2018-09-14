@@ -27,7 +27,7 @@ cScenarioTrainCaclaDV::~cScenarioTrainCaclaDV() {
 void cScenarioTrainCaclaDV::SetupTrainerParams(cNeuralNetTrainer::tParams& out_params) const
 {
 	cScenarioTrainCacla::SetupTrainerParams(out_params);
-	
+
 	out_params.mForwardDynamicsNetFile = mNetFiles[cTerrainRLCtrlFactory::eNetFileForwardDynamics];
 	out_params.mForwardDynamicsSolverFile = mNetFiles[cTerrainRLCtrlFactory::eNetFileForwardDynamicsSolver];
 	out_params.mForwardDynamicsModelFile = mNetFiles[cTerrainRLCtrlFactory::eNetFileForwardDynamicsModel];

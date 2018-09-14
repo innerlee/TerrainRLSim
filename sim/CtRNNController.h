@@ -7,7 +7,7 @@ class cCtRNNController : public virtual cCtController
 {
 public:
 	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-	
+
 	cCtRNNController();
 	virtual ~cCtRNNController();
 

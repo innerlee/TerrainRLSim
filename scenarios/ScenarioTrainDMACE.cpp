@@ -29,7 +29,7 @@ void cScenarioTrainDMACE::BuildTrainer(std::shared_ptr<cTrainerInterface>& out_t
 	int num_frags = 0;
 	int frag_size = 0;
 	GetFragParams(num_frags, frag_size);
-	
+
 	if (mEnableAsyncMode)
 	{
 		auto trainer = std::shared_ptr<cAsyncDMACETrainer>(new cAsyncDMACETrainer());
@@ -83,7 +83,7 @@ void cScenarioTrainDMACE::SetupTrainerCriticOffsetScale(const std::shared_ptr<cT
 			Eigen::VectorXd critic_input_offset;
 			Eigen::VectorXd critic_input_scale;
 			dmace_ctrl->BuildCriticInputOffsetScale(critic_input_offset, critic_input_scale);
-			
+
 			Eigen::VectorXd critic_output_offset;
 			Eigen::VectorXd critic_output_scale;
 			dmace_ctrl->BuildCriticOutputOffsetScale(critic_output_offset, critic_output_scale);

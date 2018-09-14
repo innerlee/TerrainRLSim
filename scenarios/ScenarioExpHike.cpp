@@ -85,7 +85,7 @@ cScenarioExpHike::cScenarioExpHike()
 
 	mLLCTupleBufferSize = mTupleBufferSize;
 	mLLCExpParams.mBaseActionRate = 0.01;
-	
+
 	mCharParams.mEnableSoftContact = true;
 	mLLCTupleAcceptProb = 1;
 	EnableTargetPos(true);

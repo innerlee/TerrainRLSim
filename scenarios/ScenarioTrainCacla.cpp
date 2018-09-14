@@ -29,7 +29,7 @@ void cScenarioTrainCacla::ResetCriticWeights()
 			trainer->ResetCriticWeights();
 		}
 	}
-	
+
 	{
 		auto trainer = std::dynamic_pointer_cast<cAsyncACTrainer>(mTrainer);
 		if (trainer != nullptr)
@@ -217,7 +217,7 @@ void cScenarioTrainCacla::SetupTrainerCriticOffsetScale(const std::shared_ptr<cT
 			Eigen::VectorXd critic_input_offset;
 			Eigen::VectorXd critic_input_scale;
 			cacla_ctrl->BuildCriticInputOffsetScale(critic_input_offset, critic_input_scale);
-			
+
 			std::vector<cNeuralNet::eOffsetScaleType> scale_types;
 			cacla_ctrl->BuildNNInputOffsetScaleTypes(scale_types);
 			out_trainer->SetCriticInputOffsetScaleType(scale_types);
@@ -256,7 +256,7 @@ void cScenarioTrainCacla::SetupTrainerActorOffsetScale(const std::shared_ptr<cTr
 			Eigen::VectorXd actor_input_offset;
 			Eigen::VectorXd actor_input_scale;
 			cacla_ctrl->BuildActorInputOffsetScale(actor_input_offset, actor_input_scale);
-			
+
 			std::vector<cNeuralNet::eOffsetScaleType> scale_types;
 			cacla_ctrl->BuildNNInputOffsetScaleTypes(scale_types);
 			out_trainer->SetActorInputOffsetScaleType(scale_types);

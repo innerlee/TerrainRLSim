@@ -13,7 +13,6 @@ project "TerrainRL_Optimizer2"
 
 	files {
 		-- Source files for this project
-		-- "../learning/*.cpp",
 		-- "../scenarios/*.cpp",
 		-- "../sim/*.cpp",
 		-- "../util/*.cpp",
@@ -30,11 +29,7 @@ project "TerrainRL_Optimizer2"
 		"../scenarios/Draw*.h",
 		"../scenarios/Draw*.cpp",
 		"../sim/CharTracer.cpp",
-		"../learning/DMACETrainer - Copy.cpp",
-		"../scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-		"../learning/CaclaTrainer - Copy \(2\).cpp",
-		"../learning/CaclaTrainer - Copy.cpp",
 		"./opt/QL.c",
 		"./opt/QuadProg.cpp",
 	}
@@ -44,7 +39,6 @@ project "TerrainRL_Optimizer2"
 		"../",
 		"opt",
 		"../anim",
-		"../learning",
 		"../sim",
 		"../render",
 		"../scenarios",
@@ -52,7 +46,6 @@ project "TerrainRL_Optimizer2"
 	}
 	links {
 		"terrainrlScenarios",
-		"terrainrlLearning",
 		"terrainrlAnim",
 		"terrainrlSim",
 		"terrainrlUtil",

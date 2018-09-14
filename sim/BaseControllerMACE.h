@@ -9,7 +9,7 @@ class cBaseControllerMACE : public virtual cTerrainRLCharController
 {
 public:
 	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-	
+
 	cBaseControllerMACE();
 	virtual ~cBaseControllerMACE();
 

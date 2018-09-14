@@ -14,8 +14,6 @@ project "TerrainRL_Optimizer"
 
 	files {
 		-- Source files for this project
-		"../learning/*.h",
-		"../learning/*.cpp",
 		"../scenarios/*.h",
 		"../scenarios/*.cpp",
 		"../sim/*.h",
@@ -36,11 +34,8 @@ project "TerrainRL_Optimizer"
 		"../scenarios/Draw*.h",
 		"../scenarios/Draw*.cpp",
 		"../sim/CharTracer.cpp",
-		"../learning/DMACETrainer - Copy.cpp",
 		"../scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-		"../learning/CaclaTrainer - Copy \(2\).cpp",
-		"../learning/CaclaTrainer - Copy.cpp",
 	}
 
 	includedirs {

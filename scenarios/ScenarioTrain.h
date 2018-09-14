@@ -58,7 +58,7 @@ protected:
 	int mExpPoolSize;
 	bool mEnableTraining;
 	bool mEnableAsyncMode;
-	
+
 	int mNumAnnealIters;
 	int mNumBaseAnnealIters;
 
@@ -82,7 +82,7 @@ protected:
 	virtual void BuildScenePool();
 	virtual void ClearScenePool();
 	virtual void ResetScenePool();
-	
+
 	virtual void BuildExpScene(int id, std::shared_ptr<cScenarioExp>& out_exp) const;
 	virtual void SetupExpScene(int id, std::shared_ptr<cScenarioExp>& out_exp) const;
 	virtual const std::shared_ptr<cCharController>& GetDefaultController() const;
@@ -91,7 +91,7 @@ protected:
 	virtual void InitTrainer();
 	virtual void InitLearners();
 	virtual void SetupLearner(const std::shared_ptr<cSimCharacter>& character, std::shared_ptr<cNeuralNetLearner>& out_learner) const;
-	
+
 	virtual const std::shared_ptr<cCharController>& GetRefController() const;
 
 	virtual void BuildTrainer(std::shared_ptr<cTrainerInterface>& out_trainer);
@@ -104,7 +104,7 @@ protected:
 	virtual void UpdateExpScene(double time_step, int exp_id, std::shared_ptr<cScenarioExp>& out_exp, bool& out_done);
 	virtual void UpdateExpSceneRates(int exp_id, std::shared_ptr<cScenarioExp>& out_exp) const;
 	virtual void UpdateSceneCurriculum(double phase, std::shared_ptr<cScenarioExp>& out_exp) const;
-	
+
 	virtual cCharController::tExpParams BuildExpParams(int iter) const;
 	virtual double CalcCurriculumPhase(int iter) const;
 
