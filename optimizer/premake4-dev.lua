@@ -86,7 +86,6 @@ project "TerrainRL_Optimizer2"
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 			linuxLibraryLoc .. "CMA-ESpp/cma-es",
 			"/usr/include/hdf5/serial/",
 		}
@@ -152,7 +151,6 @@ project "TerrainRL_Optimizer2"
 			windowsLibraryLoc .. "Json_cpp",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
-			windowsLibraryLoc .. "OpenCV/include",
 			windowsLibraryLoc .. "boost_lib",
 		}
 
@@ -163,7 +161,6 @@ project "TerrainRL_Optimizer2"
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
 		links {
@@ -174,20 +171,6 @@ project "TerrainRL_Optimizer2"
 			"BulletCollision_Debug",
 			"LinearMath_Debug",
 			"jsoncpp_Debug",
-			"opencv_core300d",
-			"opencv_calib3d300d",
-			"opencv_flann300d",
-			"opencv_highgui300d",
-			"opencv_imgproc300d",
-			"opencv_imgcodecs300d",
-			"opencv_ml300d",
-			"opencv_objdetect300d",
-			"opencv_photo300d",
-			"opencv_features2d300d",
-			"opencv_stitching300d",
-			"opencv_video300d",
-			"opencv_videostab300d",
-			"opencv_hal300d",
 			"libjpegd",
 			"libjasperd",
 			"libpngd",
