@@ -16,14 +16,11 @@
 #include "scenarios/DrawScenarioTrainDPG.h"
 #include "scenarios/DrawScenarioTrainMACEDPG.h"
 #include "scenarios/DrawScenarioPoliEval.h"
-#include "scenarios/DrawScenarioMimicEval.h"
 #include "scenarios/DrawScenarioHikeEval.h"
 #include "scenarios/DrawScenarioSoccerEval.h"
 #include "scenarios/DrawScenarioTrainDMACE.h"
 #include "scenarios/DrawScenarioTrainHike.h"
 #include "scenarios/DrawScenarioTrainSoccer.h"
-#include "scenarios/DrawScenarioMimic.h"
-#include "scenarios/DrawScenarioMimicRNN.h"
 #include "scenarios/DrawScenarioTerrainViewer.h"
 #include "scenarios/DrawScenarioHackMultChar.h"
 
@@ -186,14 +183,6 @@ void SetupScenario()
 	{
 		gScenario = std::shared_ptr<cDrawScenarioTrainDMACE>(new cDrawScenarioTrainDMACE(gCamera));
 	}
-	else if (scenario_name == "mimic")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioMimic>(new cDrawScenarioMimic(gCamera));
-	}
-	else if (scenario_name == "mimic_rnn")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioMimicRNN>(new cDrawScenarioMimicRNN(gCamera));
-	}
 	else if (scenario_name == "train_hike")
 	{
 		gScenario = std::shared_ptr<cDrawScenarioTrainHike>(new cDrawScenarioTrainHike(gCamera));
@@ -206,9 +195,6 @@ void SetupScenario()
 	{
 		gScenario = std::shared_ptr<cDrawScenarioPoliEval>(new cDrawScenarioPoliEval(gCamera));
 	}
-	else if (scenario_name == "mimic_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioMimicEval>(new cDrawScenarioMimicEval(gCamera));
 	}
 	else if (scenario_name == "hike_eval")
 	{

@@ -12,13 +12,10 @@
 #include "scenarios/ScenarioTrainDMACE.h"
 #include "scenarios/ScenarioTrainDPG.h"
 #include "scenarios/ScenarioTrainMACEDPG.h"
-#include "scenarios/ScenarioMimic.h"
-#include "scenarios/ScenarioMimicRNN.h"
 #include "scenarios/ScenarioTrainHike.h"
 #include "scenarios/ScenarioTrainSoccer.h"
 #include "scenarios/ScenarioTrainLoco.h"
 #include "scenarios/OptScenarioPoliEval.h"
-#include "scenarios/OptScenarioMimicEval.h"
 #include "scenarios/OptScenarioHikeEval.h"
 #include "scenarios/OptScenarioSoccerEval.h"
 #include "scenarios/OptScenarioLocoEval.h"
@@ -172,22 +169,6 @@ void SetupScenario()
 
 		gScenario = scene;
 	}
-	else if (scenario_name == "mimic")
-	{
-		auto scene = std::shared_ptr<cScenarioMimic>(new cScenarioMimic());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "mimic_rnn")
-	{
-		auto scene = std::shared_ptr<cScenarioMimicRNN>(new cScenarioMimicRNN());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
 	else if (scenario_name == "train_hike")
 	{
 		auto scene = std::shared_ptr<cScenarioTrainHike>(new cScenarioTrainHike());
@@ -215,14 +196,6 @@ void SetupScenario()
 	else if (scenario_name == "poli_eval")
 	{
 		auto scene = std::shared_ptr<cOptScenarioPoliEval>(new cOptScenarioPoliEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "mimic_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioMimicEval>(new cOptScenarioMimicEval());
 		scene->SetTimeStep(cOptScenario::gTimeStep);
 		scene->SetPoolSize(gNumThreads);
 
