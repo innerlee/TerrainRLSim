@@ -17,19 +17,19 @@ local linuxLibraryLoc = "./external/"
 local windowsLibraryLoc = "../library/"
 
 solution "TerrainRL"
-	configurations { 
+	configurations {
 		"Debug",
 		"Release"
 	}
-	
+
 	platforms {
-		"x32", 
+		"x32",
 		"x64"
 	}
 	location (todir)
 
 	-- extra warnings, no exceptions or rtti
-	flags { 
+	flags {
 		-- "ExtraWarnings",
 --		"FloatFast",
 --		"NoExceptions",
@@ -46,7 +46,7 @@ solution "TerrainRL"
 			Optimize = Off
 		}
 		targetdir ( "./x64/Debug" )
- 
+
  	-- release configs
 	configuration {"Release*"}
 		defines { "NDEBUG" }
@@ -63,7 +63,7 @@ if os.get() == "windows" then -- premake4 does not support MultiProcessCompile
 			"MultiProcessorCompile"
 		}
 end
-	
+
 
 	configuration {"windows", "Debug*"}
 		targetdir ( "./x64/Debug" )
@@ -72,7 +72,7 @@ end
 
 	configuration { "linux", "Debug*", "gmake"}
         buildoptions { "-ggdb -fPIC" }
-		linkoptions { 
+		linkoptions {
 			-- "-stdlib=libc++" ,
 			"-Wl,-rpath," .. path.getabsolute("lib")
 		}
@@ -80,7 +80,7 @@ end
 
 	configuration { "linux", "Release*", "gmake"}
         buildoptions { "-ggdb -fPIC" }
-		linkoptions { 
+		linkoptions {
 			-- "-stdlib=libc++" ,
 			"-Wl,-rpath," .. path.getabsolute("lib")
 		}
@@ -88,7 +88,7 @@ end
 
 	configuration { "macosx" }
         buildoptions { "-stdlib=libc++ -std=c++11 -ggdb -fPIC" }
-		linkoptions { 
+		linkoptions {
 			"-stdlib=libc++" ,
 			"-Wl,-rpath," .. path.getabsolute("lib")
 		}
@@ -96,7 +96,7 @@ end
 	        "OpenGL.framework",
         }
         targetdir ( "./bin/Debug/" )
-      
+
 	if os.get() == "macosx" then
 		premake.gcc.cc = "clang"
 		premake.gcc.cxx = "clang++"
@@ -108,7 +108,7 @@ project "TerrainRL"
 	language "C++"
 	kind "ConsoleApp"
 
-	files { 
+	files {
 		-- Source files for this project
 		-- "render/*.cpp",
 		-- "util/*.cpp",
@@ -119,13 +119,13 @@ project "TerrainRL"
 		"external/LodePNG/*.cpp",
 		"Main.cpp"
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"anim",
 		"learning",
@@ -143,7 +143,7 @@ project "TerrainRL"
 		"terrainrlRender",
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -153,32 +153,29 @@ project "TerrainRL"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -186,7 +183,6 @@ project "TerrainRL"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -204,7 +200,6 @@ project "TerrainRL"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -214,7 +209,7 @@ project "TerrainRL"
 				"GLEW",
 				"GLU",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -228,7 +223,6 @@ project "TerrainRL"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -242,44 +236,37 @@ project "TerrainRL"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -326,13 +313,12 @@ project "TerrainRL"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -379,7 +365,6 @@ project "TerrainRL"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -387,11 +372,11 @@ project "TerrainRL"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -401,23 +386,23 @@ project "terrainrlUtil"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"util/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"util"
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -427,33 +412,30 @@ project "terrainrlUtil"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 		targetdir ( "./lib" )
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -461,7 +443,6 @@ project "terrainrlUtil"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -479,7 +460,6 @@ project "terrainrlUtil"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -488,7 +468,7 @@ project "terrainrlUtil"
 				"glut",
 				"GLEW",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -502,7 +482,6 @@ project "terrainrlUtil"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -515,44 +494,37 @@ project "terrainrlUtil"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -599,13 +571,12 @@ project "terrainrlUtil"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -652,7 +623,6 @@ project "terrainrlUtil"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -660,11 +630,11 @@ project "terrainrlUtil"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -675,18 +645,18 @@ project "terrainrlLearning"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"learning/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"learning",
 		"util",
@@ -696,7 +666,7 @@ project "terrainrlLearning"
 		"terrainrlAnim",
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -706,35 +676,32 @@ project "terrainrlLearning"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 
 		targetdir ( "./lib" )
 
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -742,7 +709,6 @@ project "terrainrlLearning"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -760,7 +726,6 @@ project "terrainrlLearning"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -769,7 +734,7 @@ project "terrainrlLearning"
 				"glut",
 				"GLEW",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -783,7 +748,6 @@ project "terrainrlLearning"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -796,44 +760,37 @@ project "terrainrlLearning"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -880,13 +837,12 @@ project "terrainrlLearning"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -933,7 +889,6 @@ project "terrainrlLearning"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -941,11 +896,11 @@ project "terrainrlLearning"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -956,18 +911,18 @@ project "terrainrlAnim"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"anim/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"anim"
 	}
@@ -976,7 +931,7 @@ project "terrainrlAnim"
 		-- "terrainrlSim",
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -986,34 +941,31 @@ project "terrainrlAnim"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 
 		targetdir ( "./lib" )
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -1021,7 +973,6 @@ project "terrainrlAnim"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -1039,7 +990,6 @@ project "terrainrlAnim"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1048,7 +998,7 @@ project "terrainrlAnim"
 				"glut",
 				"GLEW",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -1062,7 +1012,6 @@ project "terrainrlAnim"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1075,44 +1024,37 @@ project "terrainrlAnim"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1159,13 +1101,12 @@ project "terrainrlAnim"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1212,7 +1153,6 @@ project "terrainrlAnim"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -1220,11 +1160,11 @@ project "terrainrlAnim"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -1235,18 +1175,18 @@ project "terrainrlSim"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"sim/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"sim",
 		-- "util"
@@ -1258,7 +1198,7 @@ project "terrainrlSim"
 		-- "terrainrlRender",
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -1268,34 +1208,31 @@ project "terrainrlSim"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 
 		targetdir ( "./lib" )
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -1303,7 +1240,6 @@ project "terrainrlSim"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -1321,7 +1257,6 @@ project "terrainrlSim"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1330,7 +1265,7 @@ project "terrainrlSim"
 				"glut",
 				"GLEW",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -1344,7 +1279,6 @@ project "terrainrlSim"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1357,44 +1291,37 @@ project "terrainrlSim"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1441,13 +1368,12 @@ project "terrainrlSim"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1494,7 +1420,6 @@ project "terrainrlSim"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -1502,11 +1427,11 @@ project "terrainrlSim"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -1517,7 +1442,7 @@ project "terrainrlRender"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"render/*.cpp",
@@ -1526,13 +1451,13 @@ project "terrainrlRender"
 		"../library/LodePNG/*.h",
 		"external/LodePNG/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 	}
 	links {
@@ -1540,7 +1465,7 @@ project "terrainrlRender"
 		"terrainrlAnim"
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -1550,35 +1475,32 @@ project "terrainrlRender"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 
 		targetdir ( "./lib" )
 
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -1586,7 +1508,6 @@ project "terrainrlRender"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -1604,7 +1525,6 @@ project "terrainrlRender"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1614,7 +1534,7 @@ project "terrainrlRender"
 				"GLEW",
 				"GLU",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -1628,7 +1548,6 @@ project "terrainrlRender"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1642,44 +1561,37 @@ project "terrainrlRender"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1726,13 +1638,12 @@ project "terrainrlRender"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -1779,7 +1690,6 @@ project "terrainrlRender"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -1787,11 +1697,11 @@ project "terrainrlRender"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -1801,18 +1711,18 @@ project "terrainrlScenarios"
 	language "C++"
 	kind "SharedLib"
 
-	files { 
+	files {
 		-- Source files for this project
 		--"util/*.h",
 		"scenarios/*.cpp",
 	}
-	excludes 
+	excludes
 	{
 		"learning/DMACETrainer - Copy.cpp",
 		"scenarios/ScenarioExpImitate - Copy.cpp",
 		"**- Copy**.cpp",
-	}	
-	includedirs { 
+	}
+	includedirs {
 		"./",
 		"scenarios"
 	}
@@ -1824,7 +1734,7 @@ project "terrainrlScenarios"
 		"terrainrlRender",
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -1834,33 +1744,30 @@ project "terrainrlScenarios"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb" )	
+	buildoptions("-std=c++0x -ggdb" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 		targetdir ( "./lib" )
-		buildoptions { 
+		buildoptions {
 			"`pkg-config --cflags gl`",
-			"`pkg-config --cflags glu`" 
+			"`pkg-config --cflags glu`"
 		}
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 			"`pkg-config --libs gl`",
-			"`pkg-config --libs glu`" 
+			"`pkg-config --libs glu`"
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -1868,7 +1775,6 @@ project "terrainrlScenarios"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			"/usr/include/hdf5/serial/",
 		}
 		defines {
@@ -1886,7 +1792,6 @@ project "terrainrlScenarios"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1895,7 +1800,7 @@ project "terrainrlScenarios"
 				"glut",
 				"GLEW",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -1909,7 +1814,6 @@ project "terrainrlScenarios"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -1922,44 +1826,37 @@ project "terrainrlScenarios"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -2006,13 +1903,12 @@ project "terrainrlScenarios"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -2059,7 +1955,6 @@ project "terrainrlScenarios"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -2067,205 +1962,16 @@ project "terrainrlScenarios"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
-			"OpenGL.framework", 
+		links {
+			"OpenGL.framework",
 			"Cocoa.framework",
 			"dl",
 			"pthread"
 		}
-		
 
-
-if os.get() == "windows" then
-   project "caffe"
-	language "C++"
-	kind "SharedLib"
-
-	files { 
-		-- Source files for this project
-		--"util/*.h",
-		"../library/caffe/src/caffe/*.cpp",
-		"../library/caffe/src/caffe/*.hpp",
-		"../library/caffe/src/caffe/layers/*.cpp",
-		"../library/caffe/src/caffe/layers/*.hpp",
-		"../library/caffe/src/caffe/proto/*.cc",
-		"../library/caffe/src/caffe/proto/*.h",
-		"../library/caffe/src/caffe/solvers/*.cpp",
-		"../library/caffe/src/caffe/solvers/*.hpp",
-		"../library/caffe/src/caffe/util/*.cpp",
-		"../library/caffe/src/caffe/util/*.hpp",
-	}
-	excludes 
-	{
-		"../library/caffe/src/caffe/util/signal_handler.cpp",
-		"learning/DMACETrainer - Copy.cpp",
-		"scenarios/ScenarioExpImitate - Copy.cpp",
-		"**- Copy**.cpp",
-	}	
-	includedirs { 
-		"./",
-		"../library/caffe/src/caffe"
-	}
-	
-
-	defines {
-		"_CRT_SECURE_NO_WARNINGS",
-		"_SCL_SECURE_NO_WARNINGS",
-		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
-		"ENABLE_TRAINING",
-	}
-
-	-- targetdir "./"
-	buildoptions("-std=c++0x -ggdb" )	
-
-	-- windows library cflags and libs
-	configuration { "windows" }
-		-- libdirs { "lib" }
-		linkoptions  { 
-			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
-		}
-		defines {
-			"_USE_MATH_DEFINES"	
-		}
-		includedirs { 
-			windowsLibraryLoc .. "Bullet/include",
-			windowsLibraryLoc,
-			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
-			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
-			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
-			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
-			windowsLibraryLoc .. "lib",
-			windowsLibraryLoc .. "boost_lib",
-			windowsLibraryLoc .. "Bullet/Debug/x64",
-			windowsLibraryLoc .. "Json_cpp/x64",
-			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
-			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
-			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
-			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
-		}
-		
-		-- release configs
-		configuration { "windows", "Debug*"}
-			defines { "DEBUG" }
-			links { 
-				"opengl32",
-				"glu32",
-				-- Just a few dependancies....
-				"BulletDynamics_Debug",
-				"BulletCollision_Debug",
-				"LinearMath_Debug",
-				"jsoncpp_Debug",
-				"opencv_core300d",
-				"opencv_calib3d300d",
-				"opencv_flann300d",
-				"opencv_highgui300d",
-				"opencv_imgproc300d",
-				"opencv_imgcodecs300d",
-				"opencv_ml300d",
-				"opencv_objdetect300d",
-				"opencv_photo300d",
-				"opencv_features2d300d",
-				"opencv_stitching300d",
-				"opencv_video300d",
-				"opencv_videostab300d",
-				"opencv_hal300d",
-				"libjpegd",
-				"libjasperd",
-				"libpngd",
-				"IlmImfd",
-				"libtiffd",
-				"libwebpd",
-				-- "cudart",
-				-- "cuda",
-				-- "nppi",
-				-- "cufft",
-				-- "cublas",
-				-- "curand",
-				"gflagsd",
-				"libglogd",
-				"libprotobufd",
-				"libprotocd",
-				"leveldbd",
-				"lmdbd",
-				"libhdf5_D",
-				"libhdf5_hl_D",
-				"Shlwapi",
-				"zlibd",
-				-- "libopenblas"
-				-- "libopenblas.dll.a",
-				"glew32",
-				-- "caffe",
-			}
-
-		-- release configs
-		configuration { "windows", "Release*"}
-			defines { "NDEBUG" }
-			links { 
-				"opengl32",
-				"glu32",
-				-- Just a few dependancies....
-				"BulletDynamics",
-				"BulletCollision",
-				"LinearMath",
-				"jsoncpp",
-				"opencv_core300",
-				"opencv_calib3d300",
-				"opencv_flann300",
-				"opencv_highgui300",
-				"opencv_imgproc300",
-				"opencv_imgcodecs300",
-				"opencv_ml300",
-				"opencv_objdetect300",
-				"opencv_photo300",
-				"opencv_features2d300",
-				"opencv_stitching300",
-				"opencv_video300",
-				"opencv_videostab300",
-				"opencv_hal300",
-				"libjpeg",
-				"libjasper",
-				"libpng",
-				"IlmImf",
-				"libtiff",
-				"libwebp",
-				-- "cudart",
-				-- "cuda",
-				-- "nppi",
-				-- "cufft",
-				-- "cublas",
-				-- "curand",
-				"gflags",
-				"libglog",
-				"libprotobuf",
-				"libprotoc",
-				"leveldb",
-				"lmdb",
-				"libhdf5",
-				"libhdf5_hl",
-				"Shlwapi",
-				"zlib",
-				-- "libopenblas"
-				-- "libopenblas.dll.a",
-				"glew32",
-				-- "caffe",
-			}
-		
-end
 
 --
 -- premake4 file to build TerrainRL_Optimizer
@@ -2281,7 +1987,7 @@ project "TerrainRL_Optimizer"
 	language "C++"
 	kind "ConsoleApp"
 
-	files { 
+	files {
 		-- Source files for this project
 		-- "../learning/*.cpp",
 		-- "../scenarios/*.cpp",
@@ -2293,7 +1999,7 @@ project "TerrainRL_Optimizer"
 		"optimizer/opt/*.h",
 		"optimizer/scenarios/*.cpp",
 		"optimizer/Main.cpp",
-		
+
 
 	}
 	excludes {
@@ -2309,7 +2015,7 @@ project "TerrainRL_Optimizer"
 		"optimizer/opt/QuadProg.cpp",
 	}
 
-	includedirs { 
+	includedirs {
 		"optimizer",
 		"./",
 		"optimizer/opt",
@@ -2328,7 +2034,7 @@ project "TerrainRL_Optimizer"
 		"terrainrlUtil",
 		"terrainrlRender",
 	}
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -2338,26 +2044,23 @@ project "TerrainRL_Optimizer"
 		"ENABLE_TRAINING",
 	}
 
-	buildoptions("-std=c++0x -ggdb -g" )	
+	buildoptions("-std=c++0x -ggdb -g" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -2365,7 +2068,6 @@ project "TerrainRL_Optimizer"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			linuxLibraryLoc .. "CMA-ESpp/cma-es",
 			"/usr/include/hdf5/serial/",
 		}
@@ -2384,7 +2086,6 @@ project "TerrainRL_Optimizer"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -2392,7 +2093,7 @@ project "TerrainRL_Optimizer"
 				"hdf5_serial",
 				-- "f2c",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			links {
@@ -2405,7 +2106,6 @@ project "TerrainRL_Optimizer"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -2417,44 +2117,37 @@ project "TerrainRL_Optimizer"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		linkoptions  { 
+		linkoptions  {
 			"libopenblas.dll.a",
-			-- "`pkg-config --cflags glu`" 
+			-- "`pkg-config --cflags glu`"
 		}
 		defines {
-			"_USE_MATH_DEFINES"	
+			"_USE_MATH_DEFINES"
 		}
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		
-		libdirs { 
+		}
+
+		libdirs {
 			windowsLibraryLoc .. "lib",
 			windowsLibraryLoc .. "boost_lib",
 			windowsLibraryLoc .. "Bullet/Debug/x64",
 			windowsLibraryLoc .. "Json_cpp/x64",
 			"C:/Program Files (x86)/boost/boost_1_58_0/stage/lib",
 			"C:/Program Files (x86)/boost/boost_1_58_0/libs",
-			windowsLibraryLoc .. "caffe/3rdparty/lib",
 			windowsLibraryLoc .. "OpenCV/x64/vc12/staticlib",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64",
 		}
-		
+
 		-- release configs
 		configuration { "windows", "Debug*"}
 			defines { "DEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -2501,13 +2194,12 @@ project "TerrainRL_Optimizer"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 		-- release configs
 		configuration { "windows", "Release*"}
 			defines { "NDEBUG" }
-			links { 
+			links {
 				"opengl32",
 				"glu32",
 				-- Just a few dependancies....
@@ -2554,7 +2246,6 @@ project "TerrainRL_Optimizer"
 				-- "libopenblas"
 				-- "libopenblas.dll.a",
 				"glew32",
-				"caffe",
 			}
 
 	-- mac includes and libs
@@ -2562,10 +2253,10 @@ project "TerrainRL_Optimizer"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
+		links {
 			"Cocoa.framework",
 			"dl",
 			"pthread"
@@ -2573,4 +2264,3 @@ project "TerrainRL_Optimizer"
 
 
 dofile( "./simAdapter/premake4-dev.lua")
-

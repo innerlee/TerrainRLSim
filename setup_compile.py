@@ -10,7 +10,6 @@ tinyxml
 boost_python
 assimp
 Qt5
-caffee
 jsoncpp
 
 
@@ -75,7 +74,7 @@ for root, dirs, files in os.walk(hh):
             fn = root + "/" + fn
             need_files_args.append("./args/" + fn[1+len(hh):])
 
-need_files_data = []            
+need_files_data = []
 hh = setup_py_dir + "/data"
 
 for root, dirs, files in os.walk(hh):
@@ -94,20 +93,18 @@ print( "need_files_data: ", need_files_data)
 #for n in need_files: print("-- %s" % n)
 
 
-extension_mod = Extension("_terrainRLAdapter", 
+extension_mod = Extension("_terrainRLAdapter",
                           # ['terrainRLAdapter.swig', "SimAdapter.cpp"],
                           # swig_opts=['-modern'],
                           ["terrainRLAdapter.cpp", "SimAdapter.cpp"],
-                          extra_compile_args = ['-std=c++0x', '-ggdb', '-fPIC', 
+                          extra_compile_args = ['-std=c++0x', '-ggdb', '-fPIC',
                                                 "-Wl,-rpath," + setup_py_dir +"/lib"],
-                          include_dirs = ['./', './external/Bullet/src', './external', 
-                                          './external/caffe/include', './external/caffe/build/src',
+                          include_dirs = ['./', './external/Bullet/src', './external',
                                           './external/3rdparty/include/hdf5',
                                           './external/3rdparty/include/',
                                           './external/3rdparty/include/openblas',
                                           './external/3rdparty/include/lmdb',
                                           './external/OpenCV/include',
-                                          './external/caffe/src/',
                                           "/usr/local/cuda/include/",
                                           "./",
                                             "anim",
@@ -145,4 +142,3 @@ setup(
         },
     # package_data = { 'args': need_files_args }
     )
-

@@ -63,8 +63,6 @@ void cSimAdapter::init()
 		gCameraPosition = tVector(0, 50, 100, 0);
 	}
 
-	InitCaffe();
-
 	if (_render)
 	{
 		glutInit(&gArgc, gArgv);

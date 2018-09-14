@@ -1,5 +1,4 @@
 #include <iostream>
-#include <caffe/caffe.hpp>
 
 #include "util/FileUtil.h"
 #include "util/ArgParser.h"
@@ -1276,13 +1275,6 @@ void HackBipedMeasurements()
 	}
 
 	cFileUtil::CloseFile(f);
-}
-
-void InitCaffe()
-{
-	FLAGS_alsologtostderr = 1;
-	int caffe_argc = 1; // hack
-	caffe::GlobalInit(&caffe_argc, &gArgv);
 }
 
 /*

@@ -10,7 +10,6 @@ tinyxml
 boost_python
 assimp
 Qt5
-caffee
 jsoncpp
 
 
@@ -74,7 +73,7 @@ for root, dirs, files in os.walk(hh):
             fn = root + "/" + fn
             need_files_args.append(fn[1+len(hh):])
 
-need_files_data = []            
+need_files_data = []
 hh = setup_py_dir + "/../data"
 
 for root, dirs, files in os.walk(hh):
@@ -87,7 +86,7 @@ for root, dirs, files in os.walk(hh):
 print("found resource files: %i" % len(need_files_args))
 #for n in need_files: print("-- %s" % n)
 
-extension_mod = Extension("_terrainRLAdapter", 
+extension_mod = Extension("_terrainRLAdapter",
                           ["terrainRLAdapter.cpp", "SimAdapter.cpp"],
                           include_dirs = ['./'])
 

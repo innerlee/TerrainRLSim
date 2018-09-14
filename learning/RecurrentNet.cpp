@@ -20,7 +20,7 @@ void cRecurrentNet::Eval(const Eigen::VectorXd& x, bool is_start, Eigen::VectorX
 	assert(x.size() == input_size);
 
 	tNNData* input_data = GetInputDataX();
-	
+
 	double start_val = (is_start) ? 0 : 1;
 	input_data[0] = start_val;
 	bool valid_offset_scale = ValidOffsetScale();

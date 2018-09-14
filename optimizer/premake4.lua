@@ -12,7 +12,7 @@ project "TerrainRL_Optimizer"
 	language "C++"
 	kind "WindowedApp"
 
-	files { 
+	files {
 		-- Source files for this project
 		"../learning/*.h",
 		"../learning/*.cpp",
@@ -43,12 +43,12 @@ project "TerrainRL_Optimizer"
 		"../learning/CaclaTrainer - Copy.cpp",
 	}
 
-	includedirs { 
+	includedirs {
 		"./",
 		"../"
 	}
 
-	
+
 
 	defines {
 		"_CRT_SECURE_NO_WARNINGS",
@@ -59,27 +59,24 @@ project "TerrainRL_Optimizer"
 	}
 
 	targetdir "../"
-	buildoptions("-std=c++0x -ggdb -g" )	
+	buildoptions("-std=c++0x -ggdb -g" )
 
 	-- linux library cflags and libs
 	configuration { "linux", "gmake" }
 
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		libdirs { 
+		libdirs {
 			-- "lib",
 			linuxLibraryLoc .. "Bullet/bin",
 			linuxLibraryLoc .. "jsoncpp/build/debug/src/lib_json",
-			linuxLibraryLoc .. "caffe/build/lib",
 		}
-		
-		includedirs { 
+
+		includedirs {
 			linuxLibraryLoc .. "Bullet/src",
 			linuxLibraryLoc,
 			linuxLibraryLoc .. "jsoncpp/include",
-			linuxLibraryLoc .. "caffe/include/",
-			linuxLibraryLoc .. "caffe/build/src/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/hdf5",
 			linuxLibraryLoc .. "3rdparty/include/",
@@ -87,7 +84,6 @@ project "TerrainRL_Optimizer"
 			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			linuxLibraryLoc .. "caffe/src/",
 			linuxLibraryLoc .. "CMA-ESpp/cma-es",
 			"/usr/include/hdf5/serial/",
 		}
@@ -96,7 +92,7 @@ project "TerrainRL_Optimizer"
 		}
 
 		configuration { "linux", "Debug*", "gmake"}
-			defines { 
+			defines {
 				"_DEBUG",
 				"ENABLE_DEBUG_PRINT",
 				"ENABLE_DEBUG_VISUALIZATION"
@@ -111,7 +107,6 @@ project "TerrainRL_Optimizer"
 				"LinearMath_gmake_x64_debug",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -119,7 +114,7 @@ project "TerrainRL_Optimizer"
 				"hdf5_serial",
 				"f2c",
 			}
-	 
+
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
@@ -133,7 +128,6 @@ project "TerrainRL_Optimizer"
 				"LinearMath_gmake_x64_release",
 				"jsoncpp",
 				"boost_system",
-				"caffe",
 				"glog",
 				--"hdf5",
 				--"hdf5_hl",
@@ -145,21 +139,15 @@ project "TerrainRL_Optimizer"
 	-- windows library cflags and libs
 	configuration { "windows" }
 		-- libdirs { "lib" }
-		includedirs { 
+		includedirs {
 			windowsLibraryLoc .. "Bullet/include",
 			windowsLibraryLoc,
 			windowsLibraryLoc .. "Json_cpp",
-			windowsLibraryLoc .. "caffe/include/",
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/hdf5",
-			windowsLibraryLoc .. "caffe/3rdparty/include/",
-			windowsLibraryLoc .. "caffe/3rdparty/include/openblas",
-			windowsLibraryLoc .. "caffe/3rdparty/include/lmdb",
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/",
 			windowsLibraryLoc .. "OpenCV/include",
-			windowsLibraryLoc .. "caffe/src/",
-		}	
-		links { 
+		}
+		links {
 			"opengl32",
 			"glu32",
 			-- Just a few dependancies....
@@ -211,14 +199,11 @@ project "TerrainRL_Optimizer"
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		-- includedirs { "/Library/Frameworks/SDL.framework/Headers" }
 		buildoptions { "-Wunused-value -Wshadow -Wreorder -Wsign-compare -Wall" }
-		linkoptions { 
+		linkoptions {
 			"-Wl,-rpath," .. path.getabsolute("lib") ,
 		}
-		links { 
+		links {
 			"Cocoa.framework",
 			"dl",
 			"pthread"
 		}
-
-
-

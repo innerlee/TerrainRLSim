@@ -11,12 +11,10 @@ int main(int argc, char** argv)
 	//HackBipedMeasurements();
 	// testBVHReader();
 	// srand((unsigned)0);
-	
+
  	gArgc = argc;
 	gArgv = argv;
 	ParseArgs(gArgc, gArgv);
-
-	InitCaffe();
 
 	glutInit(&gArgc, gArgv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
@@ -39,4 +37,3 @@ int main(int argc, char** argv)
 
 	return EXIT_SUCCESS;
 }
-

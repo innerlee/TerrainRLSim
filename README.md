@@ -5,7 +5,7 @@ This project is designed to learn good navigation skills for simulated character
 
 # Setup
 
-This section covers some of the steps to setup and compile the code. The software depends on many libraries that need to be carefully prepared and placed for the building and linking to work properly. 
+This section covers some of the steps to setup and compile the code. The software depends on many libraries that need to be carefully prepared and placed for the building and linking to work properly.
 ```
 git clone https://github.com/UBCMOCCA/TerrainRLSim.git
 ```
@@ -33,26 +33,8 @@ OpenGL should come as part of the drivers for your graphics hardware (whether pa
 
 ### Build Instructions
 
-1. Download the most recent compressed external file from the [newest release](https://github.com/xbpeng/DeepTerrainRL/releases). 
+1. Download the most recent compressed external file from the [newest release](https://github.com/xbpeng/DeepTerrainRL/releases).
 1. Extract it and move into the TerrainRL directory. The top directory of the TerrainRL repository should now contain a directory called `external`, in addition to all the other directories that were there before.
-1. *If you are using an OS other and Ubuntu 16.04 64-bit* build the source code for caffe that came in the `external` directory.
-	```
-	cd external/caffe
-	make clean
-	make
-	cd ../../
-	```
-1. Copy the compiled caffe lib directory from external/caffe/build/lib to the top directory of TerrainRL.
-	```
-	cp -r external/caffe/build/lib .
-	```
-1. Copy other prebuilt libraries from the external folder
-
-	```
-	cp external/caffe/build/lib/libcaffe.* lib/
-	cp external/Bullet/bin/*.so lib/
-	cp external/jsoncpp/build/debug/src/lib_json/*.so* lib/
-	```
 1. Generate the python code wrappers (optional, if you are not planning on simulating things from python)
 	```
 	cd simAdapter/
@@ -73,8 +55,7 @@ OpenGL should come as part of the drivers for your graphics hardware (whether pa
 	```
 	Note: you can speed up the build by appending the `-j8` flag to this last `make` command, where `8` here is the number of concurrent build threads that `make` will launch. Choose a number that makes sense based on the hardware resources you have available to you.
 
- 
-**Note:** There are some issues with the installation on Ubuntu 14.04. Some of the libraries have changed their location and name (see https://github.com/BVLC/caffe/issues/2347 for a solution).
+
 
 ## Windows
 
@@ -92,7 +73,7 @@ After the system has been build there are two executable files that server diffe
 
 Examples:
 
-	# To simulate a controller/character  
+	# To simulate a controller/character
 	./TerrainRL -arg_file= args/biped3D/test_biped_3d_args.txt
 	# To Train a controller
 	./TerrainRL_Optimizer -arg_file= args/biped3D/opt_train_biped_3d_cacla.txt
@@ -134,30 +115,18 @@ Most of these are toggles
 These lists are provided for reference only. Normally, if you follow the instructions above, you shouldn't need to know about any of this.
 
 ### Linux
- - caffe source code (must still be built)
- 	- Specific version (https://github.com/niuzhiheng/caffe.git @ 7b3e6f2341fe7374243ee0126f5cad1fa1e44e14)
-	 - 	In the instruction to make and build Caffe we uncomment the CPU only line  
-		```
-		# CPU-only switch (uncomment to build without GPU support).
-		CPU_ONLY := 1
-		```
  - BulletPhysics ([This specific threadsafe version](https://github.com/lunkhound/bullet3))
  - [Json_cpp](https://github.com/open-source-parsers/jsoncpp)
  - [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page)
- - [CMA-ES](https://github.com/AlexanderFabisch/CMA-ESpp)  
+ - [CMA-ES](https://github.com/AlexanderFabisch/CMA-ESpp)
  - [LodePNG](https://github.com/lvandeve/lodepng)
-
-### Windows
- - Caffe: https://github.com/initialneil/caffe-vs2013
- - TODO: Finish documenting this
 
 # Installing Python Library Version
 
 Follow instructions for building on Linux (Ubuntu)
- 1.  Create a variable for the path to the TerrainRL folder  
-  ```export TERRAINRL_PATH=/path/to/terrainRL``` 
+ 1.  Create a variable for the path to the TerrainRL folder
+  ```export TERRAINRL_PATH=/path/to/terrainRL```
   or
-   ```setenv TERRAINRL_PATH /path/to/terrainRL``` 
+   ```setenv TERRAINRL_PATH /path/to/terrainRL```
    Depending on your shell
  1.  Run ```pip3 install --user -v -e $TERRAINRL_PATH```
- 
