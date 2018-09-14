@@ -10,49 +10,48 @@
 #include "sim/TerrainRLCharController.h"
 #include "sim/WaypointController.h"
 #include "scenarios/ScenarioExp.h"
-#include "scenarios/ScenarioSoccerEval.h"
 
-
-cSimAdapter::cSimAdapter(std::vector<std::string> args) {
+cSimAdapter::cSimAdapter(std::vector<std::string> args)
+{
 	// TODO Auto-generated constructor stub
-	_lastControllerState=0;
-	_render=false;
+	_lastControllerState = 0;
+	_render = false;
 	_gScenario = nullptr;
 	_args = args;
 	this->_relativePath = "";
 }
 
-cSimAdapter::~cSimAdapter() {
+cSimAdapter::~cSimAdapter()
+{
 	// TODO Auto-generated destructor stub
 }
 
 void cSimAdapter::setRender(bool shouldRender)
 {
-	this->_render=shouldRender;
+	this->_render = shouldRender;
 }
 
 void cSimAdapter::init()
 {
 	// testBVHReader();
-    char** cstrings = new char*[_args.size()];
-    for(size_t i = 0; i < _args.size(); ++i)
-    {
-        cstrings[i] = new char[_args[i].size() + 1];
-        std::strcpy(cstrings[i], _args[i].c_str());
-    }
+	char **cstrings = new char *[_args.size()];
+	for (size_t i = 0; i < _args.size(); ++i)
+	{
+		cstrings[i] = new char[_args[i].size() + 1];
+		std::strcpy(cstrings[i], _args[i].c_str());
+	}
 
 	int argc = _args.size();
 	// char* argv[] = cstrings;
 
- 	gArgc = argc;
+	gArgc = argc;
 	gArgv = cstrings;
 	ParseArgs(gArgc, gArgv);
 
 	std::string scenario_name = "";
 	gArgParser->ParseString("scenario", scenario_name);
 
-	if (scenario_name == "hike_eval"
-					)
+	if (scenario_name == "hike_eval")
 	{
 		gCameraPosition = tVector(0, 50, 100, 0);
 	}
@@ -70,7 +69,7 @@ void cSimAdapter::init()
 	// ClearScenario();
 
 	// if (scenario_name == "sim_char")
-	if ( _render )
+	if (_render)
 	{
 		InitCamera();
 		ClearScenario();
@@ -87,25 +86,6 @@ void cSimAdapter::init()
 				{
 					sim_char_scene->SetOutputTex(gIntermediateFrameBuffer);
 				}
-
-			}
-			gScenario = std::shared_ptr<cDrawScenario>(scenario__);
-			this->_gScenario = gScenario;
-		}
-		else if (scenario_name == "soccer_eval")
-		{
-			gCameraPosition = tVector(0, 100, 100, 0);
-			std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioSoccerEval>(new cDrawScenarioSoccerEval(gCamera));
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
-			this->_gScenario = scenario__;
-			if (this->_gScenario != NULL)
-			{
-				auto sim_char_scene = std::dynamic_pointer_cast<cDrawScenarioTerrainRL>(scenario__);
-				if (sim_char_scene != nullptr)
-				{
-					sim_char_scene->SetOutputTex(gIntermediateFrameBuffer);
-				}
-
 			}
 			gScenario = std::shared_ptr<cDrawScenario>(scenario__);
 			this->_gScenario = gScenario;
@@ -125,19 +105,11 @@ void cSimAdapter::init()
 			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioSimChar>(new cScenarioSimChar());
 			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__);
 			// gScenario = std::shared_ptr<cScenario>(scenario__);
-			this->_gScenario = scenario__ ;
-		}
-		else if (scenario_name == "soccer_eval")
-		{
-			gCameraPosition = tVector(0, 30, 30, 0);
-			std::shared_ptr<cScenarioSimChar> scenario__ = std::shared_ptr<cScenarioSoccerEval>(new cScenarioSoccerEval());
-			this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__);
-			this->_gScenario = scenario__ ;
+			this->_gScenario = scenario__;
 		}
 		else
 		{
 			std::cout << "Scenario type not yet supported by adapter: " << scenario_name << std::endl;
-
 		}
 		// gScenario = this->_gScenario;
 	}
@@ -145,7 +117,7 @@ void cSimAdapter::init()
 	this->_gScenario->ParseArgs(gArgParser);
 	this->_gScenario->Init();
 	printf("Loaded scenario: %s\n", this->_gScenario->GetName().c_str());
-	if ( _render )
+	if (_render)
 	{
 		this->_scene = std::shared_ptr<cScenarioSimChar>(std::dynamic_pointer_cast<cDrawScenarioSimChar>(this->_gScenario)->GetScene());
 		Reshape(gWinWidth, gWinHeight);
@@ -160,7 +132,7 @@ void cSimAdapter::init()
 	InitTime();
 	// glutMainLoop();
 
-	for(size_t i = 0; i < _args.size(); ++i)
+	for (size_t i = 0; i < _args.size(); ++i)
 	{
 		// delete[] cstrings[i];
 	}
@@ -179,7 +151,7 @@ void cSimAdapter::update()
 
 	if (gAnimate)
 	{
-		if ( _render )
+		if (_render)
 		{
 			int num_steps = GetNumTimeSteps();
 			int current_time = glutGet(GLUT_ELAPSED_TIME);
@@ -189,7 +161,6 @@ void cSimAdapter::update()
 
 			double timestep = (gPlaybackSpeed < 0) ? -gAnimStep : gAnimStep;
 			// elapsedTime = int( 1000 * timestep );
-
 
 			if (this->_gScenario != NULL)
 			{
@@ -252,7 +223,7 @@ void cSimAdapter::update()
 
 void cSimAdapter::display()
 {
-	if ( _render )
+	if (_render)
 	{
 		Display();
 	}
@@ -316,10 +287,10 @@ double cSimAdapter::jointTorque()
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
 	size_t num_joints = char_->GetNumJoints();
 	double torque_sum = 0;
-	for (size_t i=0; i < num_joints; ++i)
+	for (size_t i = 0; i < num_joints; ++i)
 	{
 
-		cJoint& joint = char_->GetJoint(i);
+		cJoint &joint = char_->GetJoint(i);
 		tVector torque(0, 0, 0, 0);
 		if (joint.IsValid())
 		{
@@ -328,7 +299,6 @@ double cSimAdapter::jointTorque()
 		// std::cout << "Torque: " << torque[2] << std::endl;
 		/// Only for 2D for now...
 		torque_sum += fabs(torque[2]);
-
 	}
 	/// divided by max torque (300)
 	torque_sum = (torque_sum / (double)num_joints) / 300.0;
@@ -339,7 +309,7 @@ double cSimAdapter::updateAction(std::vector<double> act)
 {
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
 	// char_ = scene->getChar();
-	std::shared_ptr<cTerrainRLCharController> controller =  std::static_pointer_cast< cTerrainRLCharController >(char_->GetController());
+	std::shared_ptr<cTerrainRLCharController> controller = std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
 	// std::cout << "Action length: " << controller->GetPoliActionSize() << std::endl;
 	// std::cout << "Num controller params: " << controller->GetNumParams() << std::endl;
 	// ASSERT(controller->GetPoliActionSize() == act.size(),  "Action length (" << act.size() << ") incorrect, should be " << controller->GetPoliActionSize());
@@ -347,7 +317,7 @@ double cSimAdapter::updateAction(std::vector<double> act)
 	cTerrainRLCharController::tAction action;
 	action.mID;
 	action.mParams = Eigen::VectorXd::Zero(act.size());
-	for (size_t i=0; i < act.size(); i++)
+	for (size_t i = 0; i < act.size(); i++)
 	{
 		action.mParams(i) = act[i];
 	}
@@ -361,7 +331,7 @@ double cSimAdapter::updateLLCAction(std::vector<double> act)
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
 	// char_ = scene->getChar();
 	auto controller = std::dynamic_pointer_cast<cWaypointController>(char_->GetController());
-		// std::shared_ptr<cWaypointController> controller =  std::static_pointer_cast< cWaypointController >(char_->GetController());
+	// std::shared_ptr<cWaypointController> controller =  std::static_pointer_cast< cWaypointController >(char_->GetController());
 	if (controller != nullptr)
 	{
 		std::shared_ptr<cBipedStepController3D> llc = controller->GetLLC();
@@ -369,7 +339,7 @@ double cSimAdapter::updateLLCAction(std::vector<double> act)
 		cTerrainRLCharController::tAction action;
 		action.mID;
 		action.mParams = Eigen::VectorXd::Zero(act.size());
-		for (size_t i=0; i < act.size(); i++)
+		for (size_t i = 0; i < act.size(); i++)
 		{
 			action.mParams(i) = act[i];
 		}
@@ -388,7 +358,7 @@ void cSimAdapter::act(std::vector<double> act)
 
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
 	// char_ = scene->getChar();
-	std::shared_ptr<cTerrainRLCharController> controller =  std::static_pointer_cast< cTerrainRLCharController >(char_->GetController());
+	std::shared_ptr<cTerrainRLCharController> controller = std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
 	// std::cout << "Action length: " << controller->GetPoliActionSize() << std::endl;
 	// std::cout << "Num controller params: " << controller->GetNumParams() << std::endl;
 	// ASSERT(controller->GetPoliActionSize() == act.size(),  "Action length (" << act.size() << ") incorrect, should be " << controller->GetPoliActionSize());
@@ -396,13 +366,12 @@ void cSimAdapter::act(std::vector<double> act)
 	cTerrainRLCharController::tAction action;
 	action.mID;
 	action.mParams = Eigen::VectorXd::Zero(act.size());
-	for (size_t i=0; i < act.size(); i++)
+	for (size_t i = 0; i < act.size(); i++)
 	{
 		action.mParams(i) = act[i];
 	}
 
 	controller->ApplyAction(action);
-
 }
 
 std::vector<double> cSimAdapter::getState() const
@@ -410,7 +379,7 @@ std::vector<double> cSimAdapter::getState() const
 	Eigen::VectorXd state;
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
 	// char_ = scene->getChar();
-	std::shared_ptr<cTerrainRLCharController> controller =  std::static_pointer_cast< cTerrainRLCharController >(char_->GetController());
+	std::shared_ptr<cTerrainRLCharController> controller = std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
 	// const std::shared_ptr<cTerrainRLCharController>& controller =  static_cast< const std::shared_ptr<cTerrainRLCharController>& >(char_->GetController());
 	// controller = char->getCOntroller()
 	controller->ParseGround();
@@ -419,7 +388,6 @@ std::vector<double> cSimAdapter::getState() const
 
 	std::vector<double> out(state.data(), state.data() + state.rows() * state.cols());
 	return out;
-
 }
 
 std::vector<double> cSimAdapter::getLLCState()
@@ -471,7 +439,7 @@ bool cSimAdapter::agentHasFallen()
 bool cSimAdapter::needUpdatedAction()
 {
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
-	std::shared_ptr<cTerrainRLCharController> controller =  std::static_pointer_cast< cTerrainRLCharController >(char_->GetController());
+	std::shared_ptr<cTerrainRLCharController> controller = std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
 
 	int con_state_ = controller->GetState();
 	// std::cout << "Controller State: " << con_state_ << " last controller state: "<< _lastControllerState << std::endl;
@@ -492,7 +460,7 @@ void cSimAdapter::onKeyEvent(int key, int mouseX, int mouseY)
 	// Globals::app->onKeyEvent(key, mouseX, mouseY);
 	std::cout << "Trying key: " << (char(key)) << std::endl;
 	std::shared_ptr<cDrawScenario> scenario__ = std::static_pointer_cast<cDrawScenario>(this->_gScenario);
-				// std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioSimChar>(new cDrawScenarioSimChar(gCamera));
+	// std::shared_ptr<cDrawScenarioSimChar> scenario__ = std::shared_ptr<cDrawScenarioSimChar>(new cDrawScenarioSimChar(gCamera));
 	// this->_scene = std::shared_ptr<cScenarioSimChar>(scenario__->GetScene());
 	// this->_gScenario = scenario__;
 	if (scenario__ != NULL)
@@ -514,7 +482,7 @@ void cSimAdapter::setRandomSeed(int seed)
 size_t cSimAdapter::getActionSpaceSize() const
 {
 	const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
-	std::shared_ptr<cTerrainRLCharController> controller =  std::static_pointer_cast< cTerrainRLCharController >(char_->GetController());
+	std::shared_ptr<cTerrainRLCharController> controller = std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
 	return controller->GetPoliActionSize();
 }
 
@@ -524,11 +492,10 @@ size_t cSimAdapter::getObservationSpaceSize() const
 	return this->getState().size();
 }
 
-
 void cSimAdapter::handleUpdatedAction()
 {
 	auto sc = std::dynamic_pointer_cast<cScenarioExp>(this->_scene);
-	if ( sc != nullptr )
+	if (sc != nullptr)
 	{
 		sc->HandleNewActionUpdate();
 	}

@@ -12,12 +12,8 @@
 #include "scenarios/ScenarioTrainDMACE.h"
 #include "scenarios/ScenarioTrainDPG.h"
 #include "scenarios/ScenarioTrainMACEDPG.h"
-#include "scenarios/ScenarioTrainHike.h"
-#include "scenarios/ScenarioTrainSoccer.h"
 #include "scenarios/ScenarioTrainLoco.h"
 #include "scenarios/OptScenarioPoliEval.h"
-#include "scenarios/OptScenarioHikeEval.h"
-#include "scenarios/OptScenarioSoccerEval.h"
 #include "scenarios/OptScenarioLocoEval.h"
 #include "scenarios/OptScenarioMTU.h"
 #include "scenarios/OptScenarioPoliMTU.h"
@@ -169,22 +165,6 @@ void SetupScenario()
 
 		gScenario = scene;
 	}
-	else if (scenario_name == "train_hike")
-	{
-		auto scene = std::shared_ptr<cScenarioTrainHike>(new cScenarioTrainHike());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "train_soccer")
-	{
-		auto scene = std::shared_ptr<cScenarioTrainSoccer>(new cScenarioTrainSoccer());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetExpPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
 	else if (scenario_name == "train_loco")
 	{
 		auto scene = std::shared_ptr<cScenarioTrainLoco>(new cScenarioTrainLoco());
@@ -196,22 +176,6 @@ void SetupScenario()
 	else if (scenario_name == "poli_eval")
 	{
 		auto scene = std::shared_ptr<cOptScenarioPoliEval>(new cOptScenarioPoliEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "hike_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioHikeEval>(new cOptScenarioHikeEval());
-		scene->SetTimeStep(cOptScenario::gTimeStep);
-		scene->SetPoolSize(gNumThreads);
-
-		gScenario = scene;
-	}
-	else if (scenario_name == "soccer_eval")
-	{
-		auto scene = std::shared_ptr<cOptScenarioSoccerEval>(new cOptScenarioSoccerEval());
 		scene->SetTimeStep(cOptScenario::gTimeStep);
 		scene->SetPoolSize(gNumThreads);
 

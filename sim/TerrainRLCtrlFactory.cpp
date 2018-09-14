@@ -46,10 +46,8 @@
 #include "sim/CtPDPhaseTargetController.h"
 #include "sim/WaypointController.h"
 #include "sim/WaypointVelController.h"
-#include "sim/SoccerController.h"
 #include "sim/BipedStepController3D.h"
 #include "sim/CtTargetTerrController.h"
-#include "sim/CtTargetSoccerController.h"
 
 const std::string gCharCtrlName[cTerrainRLCtrlFactory::eCharCtrlMax] =
 {
@@ -101,11 +99,9 @@ const std::string gCharCtrlName[cTerrainRLCtrlFactory::eCharCtrlMax] =
 	"biped3D_cacla",
 	"waypoint",
 	"waypoint_vel",
-	"soccer",
 	"biped3d_step",
 	"biped2D_cacla_fd",
 	"ct_target_terr",
-	"ct_target_soccer"
 };
 
 cTerrainRLCtrlFactory::tCtrlParams::tCtrlParams()
@@ -120,7 +116,7 @@ cTerrainRLCtrlFactory::tCtrlParams::tCtrlParams()
 
 	mCycleDur = 1;
 	mCtQueryRate = 60; // policy queries per second
-    
+
     // hack: don't override unless specified
     mNumGroundSamples = -1;
     mGroundSampleRes3d = -1;
@@ -313,9 +309,6 @@ bool cTerrainRLCtrlFactory::BuildController(const tCtrlParams& params, std::shar
 	case eCharCtrlWaypointVel:
 		succ = BuildWaypointVelController(params, out_ctrl);
 		break;
-	case eCharCtrlSoccer:
-		succ = BuildSoccerController(params, out_ctrl);
-		break;
 	case eCharCtrlBiped3DStep:
 		succ = BuildBipedStepController3D(params, out_ctrl);
 		break;
@@ -324,9 +317,6 @@ bool cTerrainRLCtrlFactory::BuildController(const tCtrlParams& params, std::shar
 		break;
 	case eCharCtrlCtTargetTerr:
 		succ = BuildCtTargetTerrController(params, out_ctrl);
-		break;
-	case eCharCtrlCtTargetSoccer:
-		succ = BuildCtTargetSoccerController(params, out_ctrl);
 		break;
 	default:
 		assert(false && "Failed Building Unsupported Controller"); // unsupported controller
@@ -447,7 +437,7 @@ bool cTerrainRLCtrlFactory::BuildDogControllerMACE(const tCtrlParams& params, st
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -587,7 +577,7 @@ bool cTerrainRLCtrlFactory::BuildGoatControllerMACE(const tCtrlParams& params, s
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -613,7 +603,7 @@ bool cTerrainRLCtrlFactory::BuildMonopedHopperController(const tCtrlParams& para
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -677,7 +667,7 @@ bool cTerrainRLCtrlFactory::BuildMonopedHopperControllerMACE(const tCtrlParams& 
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -703,7 +693,7 @@ bool cTerrainRLCtrlFactory::BuildRaptorController(const tCtrlParams& params, std
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -767,7 +757,7 @@ bool cTerrainRLCtrlFactory::BuildRaptorControllerMACE(const tCtrlParams& params,
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -793,7 +783,7 @@ bool cTerrainRLCtrlFactory::BuildBipedController(const tCtrlParams& params, std:
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -819,7 +809,7 @@ bool cTerrainRLCtrlFactory::BuildBipedController2D(const tCtrlParams& params, st
 
 	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
 	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	
+
 	if (poli_net_file != "")
 	{
 		succ &= ctrl->LoadNet(poli_net_file);
@@ -918,14 +908,14 @@ bool cTerrainRLCtrlFactory::BuildBipedController2DCaclaFD(const tCtrlParams& par
 
 	if (fd_net_file != "")
 	{
-		
+
 		bool fd_succ = ctrl->LoadForwardDynamicsNet(fd_net_file);
 		succ &= fd_succ;
 		if (fd_succ && (fd_model_file != ""))
 		{
 			ctrl->LoadForwardDynamicsModel(fd_model_file);
 		}
-		
+
 	}
 
 	out_ctrl = ctrl;
@@ -1977,7 +1967,7 @@ bool cTerrainRLCtrlFactory::BuildWaypointController(const tCtrlParams& params, s
 	{
 		BuildBipedStepController3D(params, llc);
 	}
-	
+
 	auto step_ctrl = std::dynamic_pointer_cast<cBipedStepController3D>(llc);
 	auto ctrl = std::shared_ptr<cWaypointController>(new cWaypointController());
 
@@ -2028,54 +2018,7 @@ bool cTerrainRLCtrlFactory::BuildWaypointVelController(const tCtrlParams& params
 
 	auto step_ctrl = std::dynamic_pointer_cast<cBipedStepController3D>(llc);
 	auto ctrl = std::shared_ptr<cWaypointVelController>(new cWaypointVelController());
-	
-	ctrl->SetGround(params.mGround);
-	ctrl->EnableSymmetricStep(params.mEnableSymmetricStep);
-	ctrl->SetInitStepLen(params.mWaypointInitStepLen);
-	ctrl->Init(params.mChar.get());
-	ctrl->SetLLC(step_ctrl);
 
-	const std::string& poli_net_file = params.mNetFiles[eNetFileActor1];
-	const std::string& poli_model_file = params.mNetFiles[eNetFileActor1Model];
-	const std::string& critic_net_file = params.mNetFiles[eNetFileCritic1];
-	const std::string& critic_model_file = params.mNetFiles[eNetFileCritic1Model];
-
-	if (poli_net_file != "")
-	{
-		succ &= ctrl->LoadNet(poli_net_file);
-		if (succ && poli_model_file != "")
-		{
-			ctrl->LoadModel(poli_model_file);
-		}
-	}
-
-	if (critic_net_file != "")
-	{
-		bool critic_succ = ctrl->LoadCriticNet(critic_net_file);
-		succ &= critic_succ;
-		if (critic_succ && critic_model_file != "")
-		{
-			ctrl->LoadCriticModel(critic_model_file);
-		}
-	}
-
-	out_ctrl = ctrl;
-
-	return succ;
-}
-
-bool cTerrainRLCtrlFactory::BuildSoccerController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl)
-{
-	bool succ = true;
-
-	std::shared_ptr<cCharController> llc;
-	{
-		BuildBipedStepController3D(params, llc);
-	}
-
-	auto step_ctrl = std::dynamic_pointer_cast<cBipedStepController3D>(llc);
-	auto ctrl = std::shared_ptr<cSoccerController>(new cSoccerController());
-	
 	ctrl->SetGround(params.mGround);
 	ctrl->EnableSymmetricStep(params.mEnableSymmetricStep);
 	ctrl->SetInitStepLen(params.mWaypointInitStepLen);
@@ -2164,46 +2107,6 @@ bool cTerrainRLCtrlFactory::BuildCtTargetTerrController(const tCtrlParams& param
 	bool succ = true;
 
 	auto ctrl = std::shared_ptr<cCtTargetTerrController>(new cCtTargetTerrController());
-	ctrl->SetGround(params.mGround);
-	ctrl->Init(params.mChar.get(), params.mGravity, params.mCtrlParamFile);
-	ctrl->SetUpdatePeriod(update_period);
-	ctrl->SetCycleDur(params.mCycleDur);
-
-	const std::string& poli_net_file = params.mNetFiles[eNetFileActor];
-	const std::string& poli_model_file = params.mNetFiles[eNetFileActorModel];
-	const std::string& critic_net_file = params.mNetFiles[eNetFileCritic];
-	const std::string& critic_model_file = params.mNetFiles[eNetFileCriticModel];
-
-	if (poli_net_file != "")
-	{
-		succ &= ctrl->LoadNet(poli_net_file);
-		if (succ && poli_model_file != "")
-		{
-			ctrl->LoadModel(poli_model_file);
-		}
-	}
-
-	if (critic_net_file != "")
-	{
-		bool critic_succ = ctrl->LoadCriticNet(critic_net_file);
-		succ &= critic_succ;
-		if (critic_succ && critic_model_file != "")
-		{
-			ctrl->LoadCriticModel(critic_model_file);
-		}
-	}
-
-	out_ctrl = ctrl;
-
-	return succ;
-}
-
-bool cTerrainRLCtrlFactory::BuildCtTargetSoccerController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl)
-{
-	const double update_period = 1 / params.mCtQueryRate;
-	bool succ = true;
-
-	auto ctrl = std::shared_ptr<cCtTargetSoccerController>(new cCtTargetSoccerController());
 	ctrl->SetGround(params.mGround);
 	ctrl->Init(params.mChar.get(), params.mGravity, params.mCtrlParamFile);
 	ctrl->SetUpdatePeriod(update_period);

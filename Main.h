@@ -16,11 +16,7 @@
 #include "scenarios/DrawScenarioTrainDPG.h"
 #include "scenarios/DrawScenarioTrainMACEDPG.h"
 #include "scenarios/DrawScenarioPoliEval.h"
-#include "scenarios/DrawScenarioHikeEval.h"
-#include "scenarios/DrawScenarioSoccerEval.h"
 #include "scenarios/DrawScenarioTrainDMACE.h"
-#include "scenarios/DrawScenarioTrainHike.h"
-#include "scenarios/DrawScenarioTrainSoccer.h"
 #include "scenarios/DrawScenarioTerrainViewer.h"
 #include "scenarios/DrawScenarioHackMultChar.h"
 
@@ -183,26 +179,9 @@ void SetupScenario()
 	{
 		gScenario = std::shared_ptr<cDrawScenarioTrainDMACE>(new cDrawScenarioTrainDMACE(gCamera));
 	}
-	else if (scenario_name == "train_hike")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioTrainHike>(new cDrawScenarioTrainHike(gCamera));
-	}
-	else if (scenario_name == "train_soccer")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioTrainSoccer>(new cDrawScenarioTrainSoccer(gCamera));
-	}
 	else if (scenario_name == "poli_eval")
 	{
 		gScenario = std::shared_ptr<cDrawScenarioPoliEval>(new cDrawScenarioPoliEval(gCamera));
-	}
-	}
-	else if (scenario_name == "hike_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioHikeEval>(new cDrawScenarioHikeEval(gCamera));
-	}
-	else if (scenario_name == "soccer_eval")
-	{
-		gScenario = std::shared_ptr<cDrawScenarioSoccerEval>(new cDrawScenarioSoccerEval(gCamera));
 	}
 	else if (scenario_name == "terrain_viewer")
 	{

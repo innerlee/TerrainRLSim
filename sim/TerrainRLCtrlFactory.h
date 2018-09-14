@@ -62,11 +62,9 @@ public:
 		eCharCtrlBiped3DCacla,
 		eCharCtrlWaypoint,
 		eCharCtrlWaypointVel,
-		eCharCtrlSoccer,
 		eCharCtrlBiped3DStep,
 		eCharCtrlBiped2DCaclaFD,
 		eCharCtrlCtTargetTerr,
-		eCharCtrlCtTargetSoccer,
 		eCharCtrlMax
 	};
 
@@ -85,9 +83,9 @@ public:
 		double mCycleDur;
 		double mCtQueryRate;
 
-        // 2D terrain samples 
+        // 2D terrain samples
         int mNumGroundSamples;
-        // 3D terrain samples 
+        // 3D terrain samples
         int mGroundSampleRes3d;
         //
         int mViewDist;
@@ -97,10 +95,10 @@ public:
 		bool mEnableSymmetricStep;
 		bool mEnableSymmetricLLC;
 		double mWaypointInitStepLen;
-		
+
 		tCtrlParams();
 	};
-	
+
 	enum eNetFile
 	{
 		eNetFileActor,
@@ -130,7 +128,7 @@ public:
 	static void InitNetFileArray(std::vector<std::string>& out_arr);
 	static void ParseCharCtrl(const std::string& char_ctrl_str, eCharCtrl& out_char_ctrl);
 	static bool BuildController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	
+
 protected:
 
 	static bool BuildDogController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
@@ -140,7 +138,7 @@ protected:
 	static bool BuildDogControllerDMACE(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildDogControllerDPG(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildDogControllerMACEDPG(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	
+
 	static bool BuildGoatControllerMACE(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 
 	static bool BuildMonopedHopperController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
@@ -175,7 +173,7 @@ protected:
 	static bool BuildCtPhaseController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtPDPhaseController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtVelPhaseController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	
+
 	static bool BuildCtQController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtQPDController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildCtQVelController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
@@ -189,10 +187,8 @@ protected:
 
 	static bool BuildWaypointController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildWaypointVelController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	static bool BuildSoccerController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 	static bool BuildBipedStepController3D(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 
 	// hack hack
 	static bool BuildCtTargetTerrController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
-	static bool BuildCtTargetSoccerController(const tCtrlParams& params, std::shared_ptr<cCharController>& out_ctrl);
 };
