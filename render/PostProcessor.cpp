@@ -47,7 +47,7 @@ void cPostProcessor::Init(int window_w, int window_h) {
     // Luminance Pass
     {
         mLumProg.setShaderRelativePath(mRelativePath);
-        std::cout << "*** cPostProcessor relative path: " << mRelativePath << std::endl;
+        // std::cout << "*** cPostProcessor relative path: " << mRelativePath << std::endl;
         mLumProg.BuildShader("render/shaders/FullScreenQuad_VS.glsl", "render/shaders/Luminance_PS.glsl");
     }
 
