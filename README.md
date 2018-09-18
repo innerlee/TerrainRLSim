@@ -7,7 +7,7 @@ This project is designed to learn good navigation skills for simulated character
 This section covers some of the steps to setup and compile the code. The software depends on many libraries that need to be carefully prepared and placed for the building and linking to work properly.
 
 ```
-git clone https://github.com/UBCMOCCA/TerrainRLSim.git
+git clone https://github.com/innerlee/TerrainRLSim.git
 ```
 
 ## Linux (Ubuntu 16.04)
@@ -32,13 +32,10 @@ OpenGL should come as part of the drivers for your graphics hardware (whether pa
 
 ### Build Instructions
 
-1. Download the most recent compressed external file from the [newest release](https://github.com/xbpeng/DeepTerrainRL/releases).
-1. Extract it and move into the TerrainRL directory. The top directory of the TerrainRL repository should now contain a directory called `external`, in addition to all the other directories that were there before.
 1. When build Bullet, manually add `-fPIC` to all the generated make files in `build3/gmake/`
     ```
     CPPFLAGS  += -MMD -MP -fPIC $(DEFINES) $(INCLUDES)
     ```
-
 1. Generate the python code wrappers (optional, if you are not planning on simulating things from python)
     ```
     cd simAdapter/
@@ -114,7 +111,6 @@ These lists are provided for reference only. Normally, if you follow the instruc
 -   BulletPhysics ([This specific threadsafe version](https://github.com/lunkhound/bullet3))
 -   [Json_cpp](https://github.com/open-source-parsers/jsoncpp)
 -   [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page)
--   [CMA-ES](https://github.com/AlexanderFabisch/CMA-ESpp)
 -   [LodePNG](https://github.com/lvandeve/lodepng)
 
 # Installing Python Library Version
