@@ -38,7 +38,7 @@ OpenGL should come as part of the drivers for your graphics hardware (whether pa
     ```
 1. Generate the python code wrappers (optional, if you are not planning on simulating things from python)
     ```
-    cd simAdapter/
+    cd pyterrain/
     sudo apt-get install swig3.0 python3-dev python3-pip -y
     ./gen_swig.sh
     cd ../

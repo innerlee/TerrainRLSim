@@ -1,6 +1,6 @@
 data/policies/biped3d
 data/policies/biped3d_full/
-simAdapter/__pycache__/
+pyterrain/__pycache__/
 ../external/
 gmake/
 lib/

@@ -994,4 +994,4 @@ project "terrainrlScenarios"
 -- local linuxLibraryLoc = "../external/"
 
 
-dofile( "./simAdapter/premake4-dev.lua")
+dofile( "./pyterrain/premake4-dev.lua")

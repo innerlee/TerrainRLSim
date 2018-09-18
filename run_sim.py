@@ -1,6 +1,6 @@
 import sys
 sys.path.append("./lib")
-sys.path.append("./simAdapter")
+sys.path.append("./pyterrain")
 import terrainRLAdapter
 
 if __name__ == '__main__':

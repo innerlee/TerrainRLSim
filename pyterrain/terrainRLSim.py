@@ -53,22 +53,18 @@ class TerrainRLSimWrapper(object):
             self._sim.display()
 
     def updateAction(self, action):
-        # print ("step action: ", action)
-        self._sim.updateAction(action[0])
+        self._sim.updateAction(action)
 
         self._sim.handleUpdatedAction()
 
     def update(self):
         self._sim.update()
         self._done = self._done or self._sim.agentHasFallen()
-        # self.render()
-        # print("Trying to render...")
 
     def getObservation(self):
 
         ob = self._sim.getState()
         ob = np.reshape(np.array(ob), (-1, len(ob)))
-        # ob = np.array(ob)
         return ob
 
     def step(self, action):
@@ -77,28 +73,20 @@ class TerrainRLSimWrapper(object):
         # print ("step action: ", action)
         self.updateAction(action)
 
-        # for i in range(15):
-        if ("control_return" in self._config and (self._config["control_return"] == True)):
+        if ("control_return" in self._config and (self._config["control_return"] is True)):
             i = 0
             while ((not self._sim.needUpdatedAction()) and (i < 50)):
-                # print ("Controlling return")
                 self._sim.update()
                 self.render()
                 i = i + 1
         else:
             self._sim.update()
             self.render()
-        # if ( self._render == True ):
-        #    self._sim.display()
-        # print("Num Agents: ", self._sim.getNumAgents())
 
         ob = self.getObservation()
         reward = self.calcRewards()
 
         self._done = self._sim.agentHasFallen() or self._done
-        # observation, reward, done, info
-        # ob = np.array(ob)
-        # print ("ob shape: ", ob.shape)
         return ob, reward, self._done, None
 
     def calcRewards(self):
@@ -152,7 +140,6 @@ class TerrainRLSimWrapper(object):
             want them to be producing the same results if they all init their random number
             generator the same.
         """
-        # print ( "Setting random seed: ", seed )
         self.getEnv().setRandomSeed(seed)
 
 
@@ -162,7 +149,7 @@ def getEnvsList():
     terrainRL_PATH = os.environ['TERRAINRL_PATH']
     print("terrainRL_PATH: ", terrainRL_PATH)
     sys.path.append(terrainRL_PATH + '/lib')
-    from simAdapter import terrainRLAdapter
+    from pyterrain import terrainRLAdapter
 
     file = open(terrainRL_PATH + "/args/envs.json")
     env_data = json.load(file)
@@ -177,7 +164,7 @@ def getEnv(env_name, render=False):
     terrainRL_PATH = os.environ['TERRAINRL_PATH']
     print("terrainRL_PATH: ", terrainRL_PATH)
     sys.path.append(terrainRL_PATH + '/lib')
-    from simAdapter import terrainRLAdapter
+    from pyterrain import terrainRLAdapter
 
     env_data = getEnvsList()
     # print("Envs: ", json.dumps(env_data, indent=2))
@@ -197,23 +184,3 @@ def getEnv(env_name, render=False):
     sim_ = TerrainRLSimWrapper(sim, render=render, config=env_data[env_name])
 
     return sim_
-
-
-if __name__ == '__main__':
-
-    env = getEnv(env_name="PD_Biped2D_Gaps_Terrain-v0", render=True)
-
-    env.reset()
-    actionSpace = env.getActionSpace()
-
-    for i in range(100):
-        action = (
-            (actionSpace.getMaximum() - actionSpace.getMinimum()) * np.random.uniform()) + actionSpace.getMinimum()
-        observation, reward, done, info = env.step(action)
-        env.render()
-        print("Done: ", done)
-        # if (done):
-        #     env.reset()
-
-    env.finish()
-    print(env)

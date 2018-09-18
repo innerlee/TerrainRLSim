@@ -37,7 +37,7 @@ def recompile():
         USE_PYTHON3 = "USE_PYTHON3=0"
     cmd = """
         #!/bin/bash
-        cd simAdapter
+        cd pyterrain
         ./gen_swig.sh
         cd ../
         premake4 gmake &&
@@ -123,10 +123,10 @@ setup(
     maintainer='Glen Berseth',
     maintainer_email='glen@fracturedplane.com',
     url='https://github.com/UBCMOCCA/TerrainRL',
-    # packages=['simAdapter.terrainRLAdapter'],
+    # packages=['pyterrain.terrainRLAdapter'],
     # package_dir={'terrainRLAdapter': 'terrainRLAdapter'},
     # package_data = { 'terrainRLAdapter': ['./lib/*.so'] },
-    py_modules=['simAdapter.terrainRLAdapter'],
+    py_modules=['pyterrain.terrainRLAdapter'],
     ext_modules=[extension_mod],
     data_files=[('args', need_files_args), ('data', need_files_data)],
     cmdclass={
