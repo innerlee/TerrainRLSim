@@ -1,5 +1,5 @@
 
- /* pyterrain.i */
+ /* SimAdapter.i */
  %module terrainRLAdapter
  %{
  /* Put header files here or function declarations like below */
@@ -7,7 +7,7 @@
  #include <vector>
 
 
-#include "pyterrain.h"
+#include "SimAdapter.h"
 // #include "../sim/TerrainRLCharController.h"
 // #include "../sim/SimCharacter.h"
 // #include "../util/MathUtil.h"
@@ -37,7 +37,7 @@ namespace std {
 %rename(incrementMultiply) operator*=;
 %rename(incrementDivide) operator/=;
 
-%include "pyterrain.h"
+%include "SimAdapter.h"
 // %include "../sim/TerrainRLCharController.h"
 // %include "../sim/SimCharacter.h"
 // %include "../util/MathUtil.h"
