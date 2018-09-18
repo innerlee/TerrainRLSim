@@ -73,19 +73,18 @@ void cSimAdapter::init() {
             }
             gScenario = std::shared_ptr<cDrawScenario>(scenario__);
             this->_gScenario = gScenario;
-        }  else {
+        } else {
             std::cerr << "scenario not recognized: " << scenario_name << std::endl;
             exit(-1);
         }
-    }
-    else {
+    } else {
         ClearScenario();
         if (scenario_name == "imitate_eval") {
             std::shared_ptr<cScenarioSimChar> scenario__ =
                 std::shared_ptr<cScenarioSimChar>(new cScenarioImitateEval());
             this->_scene = std::dynamic_pointer_cast<cScenarioSimChar>(scenario__);
             this->_gScenario = scenario__;
-        }  else {
+        } else {
             std::cout << "Scenario type not yet supported by adapter: " << scenario_name << std::endl;
         }
     }
@@ -198,9 +197,7 @@ double cSimAdapter::calcVelocity() {
     return char_->GetRootVel()(0);
 }
 
-bool cSimAdapter::hasStumbled() {
-    return this->_scene->HasStumbled();
-}
+bool cSimAdapter::hasStumbled() { return this->_scene->HasStumbled(); }
 
 double cSimAdapter::jointTorque() {
     const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
@@ -275,9 +272,7 @@ bool cSimAdapter::endOfEpoch() {
     return false;
 }
 
-bool cSimAdapter::agentHasFallen() {
-    return this->_scene->HasFallen();
-}
+bool cSimAdapter::agentHasFallen() { return this->_scene->HasFallen(); }
 
 bool cSimAdapter::needUpdatedAction() {
     const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();

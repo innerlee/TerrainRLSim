@@ -2,8 +2,8 @@
 
 #include "learning/ExpTuple.h"
 #include "scenarios/ScenarioSimChar.h"
-#include "sim/TerrainRLCharController.h"
 #include "sim/SimCharacter.h"
+#include "sim/TerrainRLCharController.h"
 
 class cScenarioExp : virtual public cScenarioSimChar {
   public:

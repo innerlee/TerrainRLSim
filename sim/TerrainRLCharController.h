@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sim/Ground.h"
 #include "sim/CharController.h"
+#include "sim/Ground.h"
 #include "util/CircularBuffer.h"
 
 class cTerrainRLCharController : public cCharController {

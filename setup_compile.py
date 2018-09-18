@@ -1,6 +1,9 @@
-from setuptools import find_packages
+import sys
+import os
 from distutils.core import setup, Extension
-import sys, os
+from setuptools import find_packages
+from setuptools.command.egg_info import egg_info as EggInfo
+from setuptools.command.install import install as DistutilsInstall
 
 dep = """
 C++ dependencies for this project are:
@@ -17,9 +20,6 @@ jsoncpp
 If you see compilation error FIRST THING TO CHECK if pkg-config call was successful.
 Install dependencies that pkg-config cannot find.
 """
-
-from setuptools.command.install import install as DistutilsInstall
-from setuptools.command.egg_info import egg_info as EggInfo
 
 setup_py_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -42,9 +42,9 @@ def recompile():
         cd ../
         premake4 gmake &&
         cd gmake &&
-        make config=release64 -j 4 &&
+        make config=release64 -j &&
         cd ../
-        """#  % (setup_py_dir, USE_PYTHON3)
+        """
     print(cmd)
     """
     res = os.system(cmd)
@@ -104,10 +104,7 @@ extension_mod = Extension(
     ["terrainRLAdapter.cpp", "SimAdapter.cpp"],
     extra_compile_args=['-std=c++0x', '-ggdb', '-fPIC', "-Wl,-rpath," + setup_py_dir + "/lib"],
     include_dirs=[
-        './', './external/Bullet/src', './external',
-        './external/3rdparty/include/hdf5', './external/3rdparty/include/', './external/3rdparty/include/openblas',
-        './external/3rdparty/include/lmdb', './external/OpenCV/include',
-        "/usr/local/cuda/include/", "./", "anim", "learning", "sim", "render", "scenarios", "util", "../"
+        './', './external/Bullet/src', './external', "anim", "learning", "sim", "render", "scenarios", "util", "../"
     ])
 
 setup(

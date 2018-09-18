@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sim/TerrainRLCharController.h"
 #include "sim/CtCtrlUtil.h"
+#include "sim/TerrainRLCharController.h"
 
 #define ENABLE_MAX_STATE
 

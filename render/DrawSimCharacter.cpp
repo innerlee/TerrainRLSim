@@ -379,7 +379,6 @@ void cDrawSimCharacter::DrawCtrlInfoGroundSamples(const cCharController *ctrl, c
     glEnd();
 
     cDrawUtil::PopMatrix();
-
 }
 
 void cDrawSimCharacter::DrawCtrlInfoGroundVelSamples(const cCharController *ctrl, const tVector &offset, bool draw_3d) {

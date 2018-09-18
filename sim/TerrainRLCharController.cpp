@@ -427,5 +427,7 @@ void cTerrainRLCharController::GetVisTerrainFeatures(Eigen::VectorXd &out_featur
 void cTerrainRLCharController::GetVisActionFeatures(Eigen::VectorXd &out_features) const {
     RecordPoliAction(out_features);
 
-void cTerrainRLCharController::GetVisActionValues(Eigen::VectorXd &out_features) const { out_features = mVisNNOutput; }
+    void cTerrainRLCharController::GetVisActionValues(Eigen::VectorXd & out_features) const {
+        out_features = mVisNNOutput;
+    }
 #endif // ENABLE_DEBUG_VISUALIZATION
