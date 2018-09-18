@@ -46,6 +46,10 @@ OpenGL should come as part of the drivers for your graphics hardware (whether pa
     ./gen_swig.sh
     cd ../
     ```
+1. Use mesa instead of nvidia's opengl
+    ```
+    export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/mesa:${LD_LIBRARY_PATH}
+    ```
 1. Generate makefiles using premake4.
     ```
     ./premake4_linux clean
