@@ -1,5 +1,4 @@
 {
-	"comment__": "These environments come from the PLAiD work",
 	"PD_Biped2D_Flat_Terrain-v0": {
 		"config_file": "./args/genBiped2D/biped2d_full_flat_with_terrain_features.txt",
 		"time_limit": 256

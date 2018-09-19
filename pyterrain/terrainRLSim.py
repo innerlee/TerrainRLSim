@@ -1,3 +1,6 @@
+import os
+import sys
+import json
 import numpy as np
 from dill.source import indent
 
@@ -70,7 +73,6 @@ class TerrainRLSimWrapper(object):
     def step(self, action):
 
         action = np.array(action, dtype="float64")
-        # print ("step action: ", action)
         self.updateAction(action)
 
         if ("control_return" in self._config and (self._config["control_return"] is True)):
@@ -144,13 +146,7 @@ class TerrainRLSimWrapper(object):
 
 
 def getEnvsList():
-    import os, sys, json
-
     terrainRL_PATH = os.environ['TERRAINRL_PATH']
-    print("terrainRL_PATH: ", terrainRL_PATH)
-    sys.path.append(terrainRL_PATH + '/lib')
-    from pyterrain import terrainRLAdapter
-
     file = open(terrainRL_PATH + "/args/envs.json")
     env_data = json.load(file)
     file.close()
@@ -159,7 +155,6 @@ def getEnvsList():
 
 
 def getEnv(env_name, render=False):
-    import os, sys, json
 
     terrainRL_PATH = os.environ['TERRAINRL_PATH']
     print("terrainRL_PATH: ", terrainRL_PATH)
@@ -167,7 +162,6 @@ def getEnv(env_name, render=False):
     from pyterrain import terrainRLAdapter
 
     env_data = getEnvsList()
-    # print("Envs: ", json.dumps(env_data, indent=2))
 
     if (env_name in env_data):
         config_file = env_data[env_name]['config_file']
