@@ -3,30 +3,7 @@ import sys
 import json
 import numpy as np
 from dill.source import indent
-
-
-class ActionSpace(object):
-    """
-        Wrapper for the action space of an env
-    """
-
-    def __init__(self, action_space):
-        self._minimum = np.array(action_space[0])
-        self._maximum = np.array(action_space[1])
-
-    def getMinimum(self):
-        return self._minimum
-
-    def getMaximum(self):
-        return self._maximum
-
-    @property
-    def low(self):
-        return self._minimum
-
-    @property
-    def high(self):
-        return self._maximum
+from gym.spaces import Box
 
 
 class TerrainRLSimWrapper(object):
@@ -40,14 +17,8 @@ class TerrainRLSimWrapper(object):
         self._render = render
         self._done = None
 
-        act_low = [-1] * self.getEnv().getActionSpaceSize()
-        act_high = [1] * self.getEnv().getActionSpaceSize()
-        action_space = [act_low, act_high]
-        self._action_space = ActionSpace(action_space)
-        ob_low = [-np.inf] * self.getEnv().getObservationSpaceSize()
-        ob_high = [np.inf] * self.getEnv().getObservationSpaceSize()
-        observation_space = [ob_low, ob_high]
-        self._observation_space = ActionSpace(observation_space)
+        self._action_space = Box(-1, 1, self._sim.getActionSpaceSize())
+        self._observation_space = Box(-np.inf, np.inf, self._sim.getObservationSpaceSize())
         self._config = config
         print("TerrainRLSim Config: ", self._config)
 
@@ -120,9 +91,6 @@ class TerrainRLSimWrapper(object):
             Unload simulation, free memory.
         """
         self._sim.finish()
-
-    def getActionSpace(self):
-        return self._action_space
 
     @property
     def action_space(self):

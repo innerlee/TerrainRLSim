@@ -1,1 +1,1 @@
-from .terrainRLSim import ActionSpace, getEnvsList, getEnv
+from .terrainRLSim import getEnvsList, getEnv
