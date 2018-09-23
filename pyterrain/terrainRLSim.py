@@ -57,7 +57,7 @@ class TerrainRLSimWrapper(object):
         reward = self.calcReward()
 
         self._done = self._sim.agentHasFallen() or self._done or self.hasStumbled()
-        return ob, reward, self._done, None
+        return ob, reward, self._done, {}
 
     def hasStumbled(self):
         return self._sim.hasStumbled()
