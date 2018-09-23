@@ -120,5 +120,3 @@ Follow instructions for building on Linux (Ubuntu)
     `export TERRAINRL_PATH=/path/to/terrainRL`
     or
     `setenv TERRAINRL_PATH /path/to/terrainRL`
-    Depending on your shell
-1.  Run `pip3 install --user -v -e $TERRAINRL_PATH`
