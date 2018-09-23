@@ -6,7 +6,8 @@ from dill.source import indent
 from gym.spaces import Box
 from gym import Env
 
-class TerrainRLSimWrapper(Env):
+
+class TerrainRLSimWrapper(Env):  #pylint: disable=W0223
     """
         Wrapper for the TerrainRLSim env to make function calls more simple
     """
@@ -99,9 +100,6 @@ class TerrainRLSimWrapper(Env):
     def observation_space(self):
         return self._observation_space
 
-    def endOfEpoch(self):
-        return self._done
-
     def init(self):
         self._sim.init()
 
@@ -111,14 +109,15 @@ class TerrainRLSimWrapper(Env):
     def onKeyEvent(self, c, x, y):
         self.getEnv().onKeyEvent(c, x, y)
 
-    def seed(self, seed):
+    def seed(self, seed=None):
         """
             Set the random seed for the simulator
             This is helpful if you are running many simulations in parallel you don't
             want them to be producing the same results if they all init their random number
             generator the same.
         """
-        self.getEnv().setRandomSeed(seed)
+        if seed:
+            self.getEnv().setRandomSeed(seed)
 
 
 def getEnvsList():
