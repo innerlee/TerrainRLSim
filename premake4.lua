@@ -157,7 +157,6 @@ project "TerrainRL"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -265,7 +264,6 @@ project "terrainrlUtil"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -381,7 +379,6 @@ project "terrainrlLearning"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -495,7 +492,6 @@ project "terrainrlAnim"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -612,7 +608,6 @@ project "terrainrlSim"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -730,7 +725,6 @@ project "terrainrlRender"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",
@@ -847,7 +841,6 @@ project "terrainrlScenarios"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
 		}
 		defines {
 			"_LINUX_",

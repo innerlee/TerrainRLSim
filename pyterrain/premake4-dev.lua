@@ -85,7 +85,6 @@ project "terrainRLAdapter"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			"/usr/local/cuda/include/",
             "/usr/include/python3.6m",
 		}
 		defines {
