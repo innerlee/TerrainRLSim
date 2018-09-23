@@ -158,7 +158,6 @@ project "TerrainRL"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -267,7 +266,6 @@ project "terrainrlUtil"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -384,7 +382,6 @@ project "terrainrlLearning"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -499,7 +496,6 @@ project "terrainrlAnim"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -617,7 +613,6 @@ project "terrainrlSim"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -736,7 +731,6 @@ project "terrainrlRender"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",
@@ -854,7 +848,6 @@ project "terrainrlScenarios"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
 		}
 		defines {
 			"_LINUX_",

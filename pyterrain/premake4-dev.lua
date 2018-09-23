@@ -86,74 +86,41 @@ project "terrainRLAdapter"
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
-			linuxLibraryLoc .. "OpenCV/include",
-            "/usr/include/python3.5m",
             "/usr/include/python3.6m",
-            "/rcg/software/Linux/Ubuntu/16.04/amd64/LANG/PYTHON/3.5.2-SYSTEM/include/python3.5m" -- for cluster env at sfu
 		}
 		defines {
 			"_LINUX_",
 		}
 			-- debug configs
 		configuration { "linux", "Debug*", "gmake"}
-			if file_exists("/usr/include/python3.6m/Python.h") then
-				links {
-					"X11",
-					"dl",
-					"pthread",
-					-- Just a few dependancies....
-					"BulletDynamics_gmake_x64_debug",
-					"BulletCollision_gmake_x64_debug",
-					"LinearMath_gmake_x64_debug",
-					"boost_system",
-					"glog",
-					"python3.6m",
-				}
-			else
-				links {
-					"X11",
-					"dl",
-					"pthread",
-					-- Just a few dependancies....
-					"BulletDynamics_gmake_x64_debug",
-					"BulletCollision_gmake_x64_debug",
-					"LinearMath_gmake_x64_debug",
-					"boost_system",
-					"glog",
-					"python3.5m",
-				}
-			end
+			links {
+				"X11",
+				"dl",
+				"pthread",
+				-- Just a few dependancies....
+				"BulletDynamics_gmake_x64_debug",
+				"BulletCollision_gmake_x64_debug",
+				"LinearMath_gmake_x64_debug",
+				"boost_system",
+				"glog",
+				"python3.6m",
+			}
 
 	 	-- release configs
 		configuration { "linux", "Release*", "gmake"}
 			defines { "NDEBUG" }
-			if file_exists("/usr/include/python3.6m/Python.h") then
-				links {
-					"X11",
-					"dl",
-					"pthread",
-					-- Just a few dependancies....
-					"BulletDynamics_gmake_x64_release",
-					"BulletCollision_gmake_x64_release",
-					"LinearMath_gmake_x64_release",
-					"boost_system",
-					"glog",
-						"python3.6m",
-				}
-			else
-				links {
-					"X11",
-					"dl",
-					"pthread",
-					-- Just a few dependancies....
-					"BulletDynamics_gmake_x64_release",
-					"BulletCollision_gmake_x64_release",
-					"LinearMath_gmake_x64_release",
-					"boost_system",
-					"glog",
-					"python3.5m",
-				}
-			end
+			links {
+				"X11",
+				"dl",
+				"pthread",
+				-- Just a few dependancies....
+				"BulletDynamics_gmake_x64_release",
+				"BulletCollision_gmake_x64_release",
+				"LinearMath_gmake_x64_release",
+				"boost_system",
+				"glog",
+				"python3.6m",
+			}
 
 	-- mac includes and libs
 	configuration { "macosx" }
