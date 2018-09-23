@@ -138,7 +138,7 @@ class TerrainRLSimWrapper(object):
     def onKeyEvent(self, c, x, y):
         self.getEnv().onKeyEvent(c, x, y)
 
-    def setRandomSeed(self, seed):
+    def seed(self, seed):
         """
             Set the random seed for the simulator
             This is helpful if you are running many simulations in parallel you don't
