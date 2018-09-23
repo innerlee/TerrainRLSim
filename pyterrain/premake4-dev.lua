@@ -87,7 +87,6 @@ project "terrainRLAdapter"
 			linuxLibraryLoc .. "3rdparty/include/openblas",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
-			-- "/usr/include/python2.7",
             "/usr/include/python3.5m",
             "/usr/include/python3.6m",
             "/rcg/software/Linux/Ubuntu/16.04/amd64/LANG/PYTHON/3.5.2-SYSTEM/include/python3.5m" -- for cluster env at sfu
@@ -108,7 +107,6 @@ project "terrainRLAdapter"
 					"LinearMath_gmake_x64_debug",
 					"boost_system",
 					"glog",
-					-- "python2.7",
 					"python3.6m",
 				}
 			else
@@ -122,7 +120,6 @@ project "terrainRLAdapter"
 					"LinearMath_gmake_x64_debug",
 					"boost_system",
 					"glog",
-					-- "python2.7",
 					"python3.5m",
 				}
 			end
@@ -141,7 +138,6 @@ project "terrainRLAdapter"
 					"LinearMath_gmake_x64_release",
 					"boost_system",
 					"glog",
-					-- "python2.7",
 						"python3.6m",
 				}
 			else
@@ -155,7 +151,6 @@ project "terrainRLAdapter"
 					"LinearMath_gmake_x64_release",
 					"boost_system",
 					"glog",
-					-- "python2.7",
 					"python3.5m",
 				}
 			end
