@@ -62,7 +62,7 @@ class TerrainRLSimWrapper(object):
 
     def update(self):
         self._sim.update()
-        self._done = self._done or self._sim.agentHasFallen()
+        self._done = self._done or self._sim.agentHasFallen() or self.hasStumbled()
 
     def getObservation(self):
 
@@ -88,8 +88,11 @@ class TerrainRLSimWrapper(object):
         ob = self.getObservation()
         reward = self.calcRewards()
 
-        self._done = self._sim.agentHasFallen() or self._done
+        self._done = self._sim.agentHasFallen() or self._done or self.hasStumbled()
         return ob, reward, self._done, None
+
+    def hasStumbled(self):
+        return self._sim.hasStumbled()
 
     def calcRewards(self):
 
