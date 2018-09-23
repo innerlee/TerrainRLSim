@@ -10,7 +10,6 @@ tinyxml
 boost_python
 assimp
 Qt5
-caffee
 jsoncpp
 
 
