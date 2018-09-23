@@ -1,5 +1,3 @@
-import sys
-import numpy as np
 import pyterrain as pt
 
 env = pt.getEnv(env_name="PD_Biped2D_Slopes_Mixed_Terrain-v0", render=True)
