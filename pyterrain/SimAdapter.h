@@ -62,7 +62,8 @@ class cSimAdapter {
     virtual void setRandomSeed(int seed);
 
     virtual std::vector<double> getState() const;
-    // virtual std::vector<double> getLLCState();
+    virtual std::vector<double> getActionMin() const;
+    virtual std::vector<double> getActionMax() const;
 
     virtual size_t getActionSpaceSize() const;
     virtual size_t getObservationSpaceSize() const;

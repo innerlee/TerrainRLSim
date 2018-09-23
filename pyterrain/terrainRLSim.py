@@ -57,7 +57,6 @@ class TerrainRLSimWrapper(object):
 
     def updateAction(self, action):
         self._sim.updateAction(action)
-
         self._sim.handleUpdatedAction()
 
     def update(self):
@@ -65,13 +64,11 @@ class TerrainRLSimWrapper(object):
         self._done = self._done or self._sim.agentHasFallen() or self.hasStumbled()
 
     def getObservation(self):
-
         ob = self._sim.getState()
         ob = np.reshape(np.array(ob), (-1, len(ob)))
         return ob
 
     def step(self, action):
-
         action = np.array(action, dtype="float64")
         self.updateAction(action)
 
@@ -86,7 +83,7 @@ class TerrainRLSimWrapper(object):
             self.render()
 
         ob = self.getObservation()
-        reward = self.calcRewards()
+        reward = self.calcReward()
 
         self._done = self._sim.agentHasFallen() or self._done or self.hasStumbled()
         return ob, reward, self._done, None
@@ -94,11 +91,20 @@ class TerrainRLSimWrapper(object):
     def hasStumbled(self):
         return self._sim.hasStumbled()
 
-    def calcRewards(self):
+    def calcReward(self):
+        return self._sim.calcReward()
 
-        reward = self._sim.calcReward()
+    def jointTorque(self):
+        return self._sim.jointTorque()
 
-        return reward
+    def calcVelocity(self):
+        return self._sim.calcVelocity()
+
+    def getActionMin(self):
+        return self._sim.getActionMin()
+
+    def getActionMax(self):
+        return self._sim.getActionMax()
 
     def reset(self):
         self._sim.initEpoch()

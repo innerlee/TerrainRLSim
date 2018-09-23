@@ -262,6 +262,30 @@ std::vector<double> cSimAdapter::getState() const {
     return out;
 }
 
+std::vector<double> cSimAdapter::getActionMin() const {
+    Eigen::VectorXd actionMin;
+    Eigen::VectorXd actionMax;
+    const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
+    std::shared_ptr<cTerrainRLCharController> controller =
+        std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
+    controller->GetPoliActionBounds(actionMin, actionMax);
+
+    std::vector<double> out(actionMin.data(), actionMin.data() + actionMin.rows() * actionMin.cols());
+    return out;
+}
+
+std::vector<double> cSimAdapter::getActionMax() const {
+    Eigen::VectorXd actionMin;
+    Eigen::VectorXd actionMax;
+    const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
+    std::shared_ptr<cTerrainRLCharController> controller =
+        std::static_pointer_cast<cTerrainRLCharController>(char_->GetController());
+    controller->GetPoliActionBounds(actionMin, actionMax);
+
+    std::vector<double> out(actionMax.data(), actionMax.data() + actionMax.rows() * actionMax.cols());
+    return out;
+}
+
 bool cSimAdapter::endOfEpoch() {
 
     const std::shared_ptr<cSimCharacter> char_ = this->_scene->GetCharacter();
