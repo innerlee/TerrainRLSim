@@ -4,9 +4,9 @@ import json
 import numpy as np
 from dill.source import indent
 from gym.spaces import Box
+from gym import Env
 
-
-class TerrainRLSimWrapper(object):
+class TerrainRLSimWrapper(Env):
     """
         Wrapper for the TerrainRLSim env to make function calls more simple
     """
@@ -16,7 +16,6 @@ class TerrainRLSimWrapper(object):
         self._sim = sim
         self._render = render
         self._done = None
-
         self._action_space = Box(-1, 1, self._sim.getActionSpaceSize())
         self._observation_space = Box(-np.inf, np.inf, self._sim.getObservationSpaceSize())
         self._config = config
