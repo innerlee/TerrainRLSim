@@ -11,5 +11,5 @@ for i in range(300):
     if (done):
         env.reset()
 
-env.finish()
+env.close()
 print('finished.')

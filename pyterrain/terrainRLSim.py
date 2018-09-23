@@ -86,7 +86,7 @@ class TerrainRLSimWrapper(object):
     def initEpoch(self):
         self.reset()
 
-    def finish(self):
+    def close(self):
         """
             Unload simulation, free memory.
         """
