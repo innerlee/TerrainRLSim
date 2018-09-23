@@ -44,8 +44,8 @@ class TerrainRLSimWrapper(object):
         act_high = [1] * self.getEnv().getActionSpaceSize()
         action_space = [act_low, act_high]
         self._action_space = ActionSpace(action_space)
-        ob_low = [-1] * self.getEnv().getObservationSpaceSize()
-        ob_high = [1] * self.getEnv().getObservationSpaceSize()
+        ob_low = [-np.inf] * self.getEnv().getObservationSpaceSize()
+        ob_high = [np.inf] * self.getEnv().getObservationSpaceSize()
         observation_space = [ob_low, ob_high]
         self._observation_space = ActionSpace(observation_space)
         self._config = config
@@ -65,7 +65,7 @@ class TerrainRLSimWrapper(object):
 
     def getObservation(self):
         ob = self._sim.getState()
-        ob = np.reshape(np.array(ob), (-1, len(ob)))
+        ob = np.array(ob)
         return ob
 
     def step(self, action):
