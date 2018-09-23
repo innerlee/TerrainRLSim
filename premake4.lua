@@ -157,7 +157,6 @@ project "TerrainRL"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -267,7 +266,6 @@ project "terrainrlUtil"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -385,7 +383,6 @@ project "terrainrlLearning"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -501,7 +498,6 @@ project "terrainrlAnim"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -620,7 +616,6 @@ project "terrainrlSim"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -740,7 +735,6 @@ project "terrainrlRender"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}
@@ -859,7 +853,6 @@ project "terrainrlScenarios"
 			"C:/Program Files (x86)/boost/boost_1_58_0/",
 			linuxLibraryLoc .. "3rdparty/include/",
 			linuxLibraryLoc .. "3rdparty/include/openblas",
-			linuxLibraryLoc .. "3rdparty/include/lmdb",
 			"/usr/local/cuda/include/",
 			linuxLibraryLoc .. "OpenCV/include",
 		}

@@ -103,7 +103,7 @@ extension_mod = Extension(
     extra_compile_args=['-std=c++0x', '-ggdb', '-fPIC'],
     include_dirs=[
         './', './external/Bullet/src', './external', './external/3rdparty/include/',
-        './external/3rdparty/include/openblas', './external/3rdparty/include/lmdb', './external/OpenCV/include',
+        './external/3rdparty/include/openblas',  './external/OpenCV/include',
         "/usr/local/cuda/include/", "./", "anim", "learning", "sim", "render", "scenarios", "util", "../"
     ])
 
