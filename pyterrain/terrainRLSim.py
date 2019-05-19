@@ -17,8 +17,8 @@ class TerrainRLSimWrapper(Env):  #pylint: disable=W0223
         self._sim = sim
         self._render = render
         self._done = None
-        self._action_space = Box(-1, 1, self._sim.getActionSpaceSize())
-        self._observation_space = Box(-np.inf, np.inf, self._sim.getObservationSpaceSize())
+        self._action_space = Box([-2.57, -3.14, -1.57, -2.57, -3.14, -1.57, -1.2,  0.0, -1.2,  0.0, -0.57], [ 2.57,  0.5,   1.57,  2.57,  0.5,   1.57,  3.0,  2.8,  3.0,  2.8,  0.57], (self._sim.getActionSpaceSize(),))
+        self._observation_space = Box(-np.inf, np.inf, (self._sim.getObservationSpaceSize(),))
         self._config = config
         print("TerrainRLSim Config: ", self._config)
 
