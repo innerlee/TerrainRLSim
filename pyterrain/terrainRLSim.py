@@ -71,14 +71,13 @@ class TerrainRLSimWrapper(Env):  #pylint: disable=W0223
     def getObservation(self):
         ob = self._sim.getState()
         ob = np.array(ob)
-        print(ob)
         ob = (ob - self._obs_scale.low) / (self._obs_scale.high - self._obs_scale.low) - 0.5
-        print(ob)
-        print('')
         return ob
 
     def step(self, action):
         action = np.array(action, dtype="float64")
+        action = (action.clip(-1, 1) * 0.5 + 0.5) * (self._action_scale.high -
+                                                     self._action_scale.low) + self._action_scale.low
         self.updateAction(action)
 
         if ("control_return" in self._config and (self._config["control_return"] is True)):
