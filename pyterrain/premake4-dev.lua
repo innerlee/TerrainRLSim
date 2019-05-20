@@ -52,7 +52,6 @@ project "terrainRLAdapter"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
         "__Python_Export__"
 	}
@@ -101,7 +100,6 @@ project "terrainRLAdapter"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"python3.6m",
 			}
 
@@ -117,7 +115,6 @@ project "terrainRLAdapter"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"python3.6m",
 			}
 

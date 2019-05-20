@@ -129,7 +129,6 @@ project "TerrainRL"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -172,7 +171,6 @@ project "TerrainRL"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 				"GLU",
@@ -190,7 +188,6 @@ project "TerrainRL"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 				"GLU",
@@ -235,7 +232,6 @@ project "terrainrlUtil"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -279,7 +275,6 @@ project "terrainrlUtil"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -296,7 +291,6 @@ project "terrainrlUtil"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -348,7 +342,6 @@ project "terrainrlLearning"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -394,7 +387,6 @@ project "terrainrlLearning"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -411,7 +403,6 @@ project "terrainrlLearning"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -462,7 +453,6 @@ project "terrainrlAnim"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -507,7 +497,6 @@ project "terrainrlAnim"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -524,7 +513,6 @@ project "terrainrlAnim"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -578,7 +566,6 @@ project "terrainrlSim"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -623,7 +610,6 @@ project "terrainrlSim"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -640,7 +626,6 @@ project "terrainrlSim"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -694,7 +679,6 @@ project "terrainrlRender"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -740,7 +724,6 @@ project "terrainrlRender"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 				"GLU",
@@ -758,7 +741,6 @@ project "terrainrlRender"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 				"GLU",
@@ -812,7 +794,6 @@ project "terrainrlScenarios"
 		"_CRT_SECURE_NO_WARNINGS",
 		"_SCL_SECURE_NO_WARNINGS",
 		"CPU_ONLY",
-		"GOOGLE_GLOG_DLL_DECL=",
 		"ENABLE_TRAINING",
 	}
 
@@ -856,7 +837,6 @@ project "terrainrlScenarios"
 				"BulletCollision_gmake_x64_debug",
 				"LinearMath_gmake_x64_debug",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
@@ -873,7 +853,6 @@ project "terrainrlScenarios"
 				"BulletCollision_gmake_x64_release",
 				"LinearMath_gmake_x64_release",
 				"boost_system",
-				"glog",
 				"glut",
 				"GLEW",
 			}
